@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { FC } from "react";
+import Layout from "./layout/layout";
 
-
-function App() {
+const App: FC = () => {
   return (
-    <div>
-      <h1 className="text-2xl text-red-400">This is the first page of an awesome</h1>
-    </div>
+    <Layout>
+      <h1 className="text-2xl text-red-400">
+        This is the first page of an awesome
+      </h1>
+    </Layout>
   );
-}
+};
 
 export default App;
