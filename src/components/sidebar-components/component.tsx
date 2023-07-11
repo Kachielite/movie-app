@@ -14,11 +14,11 @@ const MenuComponent: FC<Props> = ({ menu, title }) => {
         {menu.map((item: MenuItem) => {
           return (
             <div
-              className="flex flex-row space-x-[0.94rem] w-full cursor-pointer"
+              className="group flex flex-row space-x-[0.94rem] w-full cursor-pointer hover:border-r-4 hover:border-r-primary"
               key={item.name}
             >
               {item.icon}
-              <p className="text-primaryText text-[1.125rem] font-semibold">
+              <p className="text-primaryText text-[1.125rem] font-semibold group-hover:text-primary">
                 {item.name}
               </p>
             </div>
