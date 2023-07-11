@@ -218,6 +218,30 @@ const Completed: FC<IconProp> = ({ stroke = "#F9F9F9" }) => {
   );
 };
 
+const Menu = () => {
+  return (
+    <svg viewBox="0 0 24 24" width="24px" height="24px" fill="#F9F9F9">
+      <path
+        d="M 3 5 A 1.0001 1.0001 0 1 0 3 7 L 21 7 A 1.0001 1.0001 0 1 0 21 5 L 3 5 z M 3 11 A 1.0001 1.0001 0 1 0 3 13 L 21 13 A 1.0001 1.0001 0 1 0 21 11 L 3 11 z M 3 17 A 1.0001 1.0001 0 1 0 3 19 L 21 19 A 1.0001 1.0001 0 1 0 21 17 L 3 17 z"
+        className="stroke-[#F9F9F9]"
+      />
+    </svg>
+  );
+};
+
+const Close = () => {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="24px"
+      height="24px"
+      className="block lg:hidden flex flex-row justify-end w-full fill-primary"
+    >
+      <path d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z" />
+    </svg>
+  );
+};
+
 export {
   Home,
   Discover,
@@ -229,4 +253,6 @@ export {
   Playlists,
   Watchlist,
   Completed,
+  Menu,
+  Close,
 };
