@@ -17,12 +17,15 @@ const Layout: FC<LayoutProps> = ({ children }) => {
         <div
           className={`${
             isOpen ? "-translate-x-0 " : "-translate-x-full"
-          } lg:-translate-x-0 w-[14.6875rem] absolute lg:static lg:block z-40 ease-in-out duration-1000`}
+          } lg:-translate-x-0 w-[14.6875rem] absolute lg:static lg:block z-40 lg:z-20 ease-in-out duration-500 `}
         >
           <SideMenu setIsOpen={setIsOpen} />
         </div>
-        <div className="absolute z-20">
-          <button onClick={() => setIsOpen(true)} className="block lg:hidden">
+        <div className="absolute z-20 lg:static w-full">
+          <button
+            onClick={() => setIsOpen(true)}
+            className="block lg:hidden p-3"
+          >
             <Menu />
           </button>
           {children}

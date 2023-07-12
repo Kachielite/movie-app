@@ -242,6 +242,62 @@ const Close = () => {
   );
 };
 
+const Funnel = () => {
+  return (
+    <svg
+      width="20"
+      height="24"
+      viewBox="0 0 20 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M3.33737 1H16.6626C18.5164 1 19.7323 3.28152 18.516 4.97213L12.9638 12.689C12.5511 13.2625 12.3313 13.9549 12.3313 14.6621V19.7513C12.3313 20.1568 12.1581 20.5302 11.8764 20.7748L9.65553 22.7041C8.92005 23.343 7.66868 22.8712 7.66868 21.6805V14.6621C7.66868 13.9549 7.44888 13.2625 7.03624 12.689L1.48404 4.97213C0.267673 3.28152 1.48356 1 3.33737 1Z"
+        stroke="#F9F9F9"
+        strokeOpacity="0.67"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M7 5H13"
+        stroke="#F9F9F9"
+        strokeOpacity="0.67"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
+const Search = () => {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1 11.4783C1 15.8486 1.78302 18.3581 3.30283 19.8236C4.83125 21.2975 7.35021 21.9565 11.4783 21.9565C15.6063 21.9565 18.1253 21.2975 19.6537 19.8236C21.1735 18.3581 21.9565 15.8486 21.9565 11.4783C21.9565 7.1079 21.1735 4.59842 19.6537 3.13288C18.1253 1.65904 15.6063 0.99999 11.4783 0.99999C7.35021 0.99999 4.83125 1.65904 3.30283 3.13288C1.78302 4.59842 1 7.1079 1 11.4783Z"
+        stroke="#AEAFB2"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M22.9565 22.9565L20.3478 20.3478"
+        stroke="#AEAFB2"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
 export {
   Home,
   Discover,
@@ -255,4 +311,6 @@ export {
   Completed,
   Menu,
   Close,
+  Funnel,
+  Search,
 };

@@ -1,12 +1,8 @@
 import React, { FC } from "react";
-import Layout from "./layout/layout";
+import LocalRoute from "./routes";
 
 const App: FC = () => {
-  return (
-    <Layout>
-      <h1 className="text-2xl text-red-400"></h1>
-    </Layout>
-  );
+  return <LocalRoute />;
 };
 
 export default App;
