@@ -6,6 +6,7 @@ module.exports = {
       colors: {
         primary: "#F8B319",
         primaryText: "#F9F9F9",
+        secondary: "rgba(249,_249,_249,_0.20)",
       },
     },
     fontFamily: {
