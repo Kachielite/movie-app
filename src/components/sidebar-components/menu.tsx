@@ -4,7 +4,7 @@ import MenuComponent from "./component";
 
 const MENU_ITEMS = [
   {
-    name: "Menu",
+    name: "Home",
     icon: <Home />,
   },
   {

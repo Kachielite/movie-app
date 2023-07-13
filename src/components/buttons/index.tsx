@@ -20,11 +20,14 @@ interface BtnProps {
   children: ReactNode;
   height?: string;
   width?: string;
+  onClick?: () => void;
 }
 
-const Btn: FC<BtnProps> = ({ type, children }) => {
+const Btn: FC<BtnProps> = ({ type, children, onClick }) => {
   return (
     <button
+      type="button"
+      onClick={onClick}
       className={`${
         Theme[type as keyof ButtonTheme]
       } text-[1.125rem] font-lato font-bold rounded-[0.94rem] border-2 flex justify-center items-center`}
