@@ -13,7 +13,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
   return (
     <main className="relative w-screen h-screen flex flex-row bg-[#000] overflow-hidden">
       <BackgroundGraphics />
-      <div className="absolute z-40 flex flex-row w-full">
+      <div className="absolute z-40 flex flex-row w-full h-full">
         <div
           className={`${
             isOpen ? "-translate-x-0 " : "-translate-x-full"
@@ -21,7 +21,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
         >
           <SideMenu setIsOpen={setIsOpen} />
         </div>
-        <div className="absolute z-20 lg:static w-full">
+        <div className="absolute z-20 lg:static w-full full">
           <button
             onClick={() => setIsOpen(true)}
             className="block lg:hidden p-3"

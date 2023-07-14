@@ -3,6 +3,7 @@ import { FC, ReactNode } from "react";
 interface ButtonTheme {
   primary: string;
   secondary: string;
+  third: string;
   arrow: string;
 }
 
@@ -11,6 +12,8 @@ const Theme: ButtonTheme = {
     "bg-primary text-black hover:text-primary border-primary hover:bg-opacity-0 px-[2.94rem] py-[1.19rem]",
   secondary:
     "bg-[rgba(249,_249,_249,_0.20)] border-[rgba(249,_249,_249,_0.20)] text-white hover:bg-black/[.5] hover:border-white px-[1.5rem] lg:px-[2.94rem] py-[1.19rem]",
+  third:
+    "bg-primary text-black hover:text-primary border-primary hover:bg-opacity-0 px-[2rem] h-[3.13rem]",
   arrow:
     "bg-[rgba(249,_249,_249,_0.20)] text-white border-[rgba(249,_249,_249,_0.20)] hover:bg-black/[.5] hover:border-white h-[3.13rem] w-[3.13rem]",
 };
