@@ -6,7 +6,7 @@ interface Props {
 
 const MenuItem: FC<Props> = ({ name }) => {
   return (
-    <p className="pb-[0.88rem] text-primaryText text-xl lg:text-[1.5rem] font-semibold border-b-2 border-black hover:font-bold hover:text-primary hover:border-primary">
+    <p className=" text-primaryText text-xl lg:text-[1.5rem] font-semibold border-b-2 border-black hover:font-bold hover:text-primary hover:border-primary">
       {name}
     </p>
   );

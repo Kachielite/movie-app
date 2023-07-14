@@ -14,5 +14,5 @@ module.exports = {
       lato: ["Lato", "serif"],
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar")],
 };
