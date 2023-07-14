@@ -35,11 +35,18 @@ const moviesData = [
     length: 5,
     image: BloodShot,
   },
+  {
+    name: "Bloodshot",
+    rating: 4.3,
+    category: "Action",
+    length: 5,
+    image: BloodShot,
+  },
 ];
 
 const CardContainer: FC = () => {
   return (
-    <div className="flex flex-row justify-start items-center space-x-[1.88rem]">
+    <div className="flex flex-row justify-start items-center space-x-[1.88rem] w-full overflow-x-auto">
       {moviesData.map((m: Movie, index) => (
         <Card
           key={index}

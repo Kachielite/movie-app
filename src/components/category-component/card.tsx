@@ -6,7 +6,7 @@ import { Plus, Star } from "../Icon-components";
 
 const Card: FC<Movie> = ({ name, rating, category, length, image }) => {
   return (
-    <div className="relative w-[14.81rem] h-[18.63rem] flex flex-col justify-center items-center overflow-hidden rounded-[1.25rem] bg-[linear-gradient(180deg,_rgba(22,_24,_30,_0.00)_0%,_rgba(22,_24,_30,_0.70)_61.28%),_linear-gradient(0deg,_rgba(22,_24,_30,_0.40)_0%,_rgba(22,_24,_30,_0.40)_100%)]">
+    <div className="relative flex-shrink-0 w-[14.81rem] h-[18.63rem] flex flex-col justify-center items-center overflow-hidden rounded-[1.25rem] bg-[linear-gradient(180deg,_rgba(22,_24,_30,_0.00)_0%,_rgba(22,_24,_30,_0.70)_61.28%),_linear-gradient(0deg,_rgba(22,_24,_30,_0.40)_0%,_rgba(22,_24,_30,_0.40)_100%)]">
       <img
         src={image}
         alt={name}

@@ -21,7 +21,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
         >
           <SideMenu setIsOpen={setIsOpen} />
         </div>
-        <div className="absolute z-20 lg:static w-full full">
+        <div className="absolute z-20 lg:static w-full h-full">
           <button
             onClick={() => setIsOpen(true)}
             className="block lg:hidden p-3"

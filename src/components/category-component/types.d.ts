@@ -5,3 +5,7 @@ export interface Movie {
   length: number;
   image: string;
 }
+
+export interface CategoryProps {
+  title: string;
+}

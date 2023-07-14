@@ -1,14 +1,14 @@
 import { FC } from "react";
 import CardContainer from "./card-container";
-import Loki from "../../assets/images/loki.png";
+import { CategoryProps } from "./types";
 
-const PopularFeatureComponent: FC = () => {
+const CategoryComponent: FC<CategoryProps> = ({ title }) => {
   return (
     <div className="flex flex-col justify-start items-start mt-[2.75rem] space-y-[1rem] font-lato text-white w-full">
-      <h2 className="font-extrabold text-[1.88rem]">Popular on Honey Movies</h2>
+      <h2 className="font-extrabold text-[1.88rem]">{title}</h2>
       <CardContainer />
     </div>
   );
 };
 
-export default PopularFeatureComponent;
+export default CategoryComponent;
