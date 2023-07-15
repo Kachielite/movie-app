@@ -19,7 +19,7 @@ const menu = [
 
 const NavBar: FC = () => {
   return (
-    <div className="flex flex-col-reverse lg:flex-row justify-between items-center font-lato w-full px-4 bg-black pb-4">
+    <div className="flex flex-col-reverse lg:flex-row justify-between items-center font-lato w-full px-4 bg-black pb-px">
       <Menu menu={menu} />
       <SearchBar />
     </div>
