@@ -31,7 +31,7 @@ const genreData = [
 
 const CategoriesRightBarComponent: FC = () => {
   return (
-    <div className="flex flex-col justify-start space-y-[3.75rem] items-center pl-[1.87rem] w-full h-full">
+    <div className="flex flex-col justify-start space-y-[3.75rem] items-center pl-[1.87rem] w-full h-full overflow-y-auto scrollbar-none pb-36">
       <CategorySlide
         movieData={moviesData}
         categoryTitle="Playing"

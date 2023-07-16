@@ -1,13 +1,14 @@
 import { FC } from "react";
 import { useParams } from "react-router-dom";
+import Layout from "../layout/layout";
 
 const Category: FC = () => {
-  const params = useParams();
-  console.log(params);
+  const { type } = useParams();
+
   return (
-    <div className="flex flex-col flex-wrap justify-start items-start w-full h-full overflow-y-auto">
-      <h1>Top Rated</h1>
-    </div>
+    <Layout>
+      <h1>{type}</h1>
+    </Layout>
   );
 };
 

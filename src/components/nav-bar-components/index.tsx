@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { Dispatch, FC, SetStateAction } from "react";
 import Menu from "./menu";
 import SearchBar from "./search-bar";
 
@@ -17,11 +17,15 @@ const menu = [
   },
 ];
 
-const NavBar: FC = () => {
+interface Props {
+  open: Dispatch<SetStateAction<boolean>>;
+}
+
+const NavBar: FC<Props> = ({ open }) => {
   return (
-    <div className="flex flex-col-reverse lg:flex-row justify-between items-center font-lato w-full px-4 bg-black pb-px">
+    <div className="flex flex-col-reverse lg:flex-row justify-between items-center font-lato w-full px-4 bg-black pb-px ">
       <Menu menu={menu} />
-      <SearchBar />
+      <SearchBar open={open} />
     </div>
   );
 };

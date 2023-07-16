@@ -10,8 +10,6 @@ interface Props {
 }
 
 const Controls: FC<Props> = ({ slideIndex, slideHandler, caption }) => {
-  console.log(slideIndex);
-
   const currentSlide: (index: number) => string = (index) => {
     if (index === slideIndex) {
       return "#F8B319";
