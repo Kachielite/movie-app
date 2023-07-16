@@ -6,6 +6,7 @@ const LocalRoute: FC = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/category/:type" element={<Home />} />
     </Routes>
   );
 };
