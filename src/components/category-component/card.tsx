@@ -3,6 +3,7 @@ import Rating from "react-rating";
 import { Movie } from "./types";
 import Btn from "../buttons";
 import { Plus, Star } from "../Icon-components";
+import RatingComponent from "../rating-component";
 
 const Card: FC<Movie> = ({ name, rating, category, length, image }) => {
   return (
@@ -15,12 +16,7 @@ const Card: FC<Movie> = ({ name, rating, category, length, image }) => {
       <div className="absolute z-40 flex flex-col justify-between items-start pt-[1.31rem] px-[0.62rem] pb-[0.62rem] w-full h-full text-white">
         <div className="px-[0.69rem] w-full text-left flex flex-col justify-start space-y-[0.75rem]">
           <h3 className="text-[1.5rem] font-extrabold">{name}</h3>
-          <Rating
-            emptySymbol={<Star color="#4F4F54" />}
-            fullSymbol={<Star color="#F8B319" />}
-            initialRating={rating}
-            readonly
-          />
+          <RatingComponent rating={rating} />
         </div>
         <div className="flex flex-col justify-start space-y-[0.88rem] w-full">
           <div className="flex flex-row justify-between items-center w-full text-[rgba(249,_249,_249,_0.70)] text-[1.13rem] font-bold">
