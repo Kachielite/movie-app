@@ -4,7 +4,7 @@ import { Movie } from "./types";
 
 const Card: FC<Movie> = ({ name, date, description, image, rating }) => {
   return (
-    <div className="flex flex-col justify-start items-start flex-shrink-0 font-lato w-[18.44rem] pb-10">
+    <div className="flex flex-col justify-start items-start flex-shrink-0 font-lato w-full md:w-[18.44rem] pb-10 px-2">
       <div className="relative w-full h-[26.06rem] rounded-t-[1.06rem] overflow-hidden">
         <img
           src={image}
