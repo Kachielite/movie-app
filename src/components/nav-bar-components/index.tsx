@@ -5,16 +5,16 @@ import SearchBar from "./search-bar";
 const menu = [
   {
     name: "Movies",
-    link: "/",
+    selection: "movie",
   },
   {
     name: "TV Shows",
-    link: "/",
+    selection: "tv",
   },
-  {
-    name: "Anime",
-    link: "/",
-  },
+  // {
+  //   name: "Anime",
+  //   link: "/",
+  // },
 ];
 
 interface Props {
