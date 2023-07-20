@@ -1,8 +1,7 @@
 import React, { FC } from "react";
-import Rating from "react-rating";
 import { Movie } from "./types";
 import Btn from "../buttons";
-import { Plus, Star } from "../Icon-components";
+import { Plus } from "../Icon-components";
 import RatingComponent from "../rating-component";
 
 const Card: FC<Movie> = ({ name, rating, category, length, image }) => {

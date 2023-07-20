@@ -5,11 +5,12 @@ import RatingComponent from "../components/rating-component";
 import MoviePoster from "../assets/images/bg.png";
 import Poster from "../assets/images/bg2.png";
 import FilmHouse from "../assets/images/producer-housing.png";
+import CategoryComponent from "../components/category-component";
 
 const Movie: FC = () => {
   return (
-    <div className="w-full min-h-screen  bg-black flex flex-col justify-start items-start font-lato">
-      <div className="w-full h-screen flex justify-start items-start relative">
+    <div className="w-full h-full  bg-black flex flex-col justify-start items-start font-lato">
+      <div className="w-full h-[98rem] md:h-[55rem] flex justify-start items-start relative">
         <img
           src={MoviePoster}
           alt="Movie Background"
@@ -42,24 +43,59 @@ const Movie: FC = () => {
               </p>
               <div className="flex flex-col md:flex-row items-start md:items-center space-y-5 md:space-y-0 md:space-x-[2.85rem] justify-start md:justify-center">
                 <Btn type="secondary">
-                  <div className="flex flex-row items-center space-x-[0.9rem] justify-center px-[0.65rem]">
+                  <div className="flex flex-row items-center space-x-[0.9rem] justify-center ">
                     <Plus />
                     <p>Watchlist</p>
                   </div>
                 </Btn>
                 <Btn type="primary">
-                  <p>Watch now</p>
+                  <p className="px-[0.65rem]">Watch now</p>
                 </Btn>
               </div>
             </div>
-            <div className="h-[35.5rem] w-full md:w-[28.25rem] flex-shrink-0 rounded-[1.25rem] overflow-hidden relative flex justify-center items-center mb-10 md:mb-0">
-              <img src={Poster} alt="movie" className="h-full w-full" />
+            <div className="h-[31.5rem] w-full md:w-[28.25rem] flex-shrink-0 rounded-[1.25rem] overflow-hidden relative flex justify-center items-center mb-10 md:mb-0">
+              <img
+                src={Poster}
+                alt="movie"
+                className="h-full w-full object-cover"
+              />
               <div className="rounded-bl-[1.25rem] bg-primary h-[2.19rem] w-[10.56rem] absolute top-0 right-0 flex justify-center items-center">
                 <p className="text-[1.25rem] font-bold">Top rated</p>
               </div>
             </div>
           </div>
         </div>
+      </div>
+      <div className="flex flex-col justify-start items-start w-full text-primaryText border-y-[0.063rem] border-[rgba(255, 255, 255, 0.1)]">
+        <div className="flex flex-col lg:flex-row lg:flex-wrap justify-between items-start lg:items-center py-[0.94rem] w-full font-bold px-4 md:px-[6.12rem] text-[1rem]">
+          <p className="text-primary">
+            Status:{" "}
+            <span className="font-normal text-primaryText">Released</span>
+          </p>
+          <p className="text-primary">
+            Released Date:{" "}
+            <span className="font-normal text-primaryText">Jul 8, 2023</span>
+          </p>
+          <p className="text-primary">
+            Runtime:{" "}
+            <span className="font-normal text-primaryText">2h 44m</span>
+          </p>
+          <p className="text-primary">
+            Director:{" "}
+            <span className="font-normal text-primaryText">
+              Christopher McQuarrie
+            </span>
+          </p>
+          <p className="text-primary">
+            Writer:{" "}
+            <span className="font-normal text-primaryText">
+              Christopher McQuarrie, Erik Jendresen
+            </span>
+          </p>
+        </div>
+      </div>
+      <div className="py-10 px-4 md:px-[5.12rem]">
+        <CategoryComponent title="Similar Movies" />
       </div>
     </div>
   );

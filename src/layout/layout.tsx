@@ -1,7 +1,6 @@
 import { FC, ReactNode, useState } from "react";
 import SideMenu from "./SideMenu";
 import BackgroundGraphics from "../components/backgroundGraphics";
-import { Menu } from "../components/Icon-components";
 import CategoriesRightbarComponent from "../components/categories-rightbar-component";
 import NavBar from "../components/nav-bar-components";
 
