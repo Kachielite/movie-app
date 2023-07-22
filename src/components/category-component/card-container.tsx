@@ -39,14 +39,16 @@ const CardContainer: FC = () => {
                 title,
                 vote_count,
                 vote_average,
-                poster_path,
+                backdrop_path,
+                genre_ids,
               }: MovieData) => (
                 <Card
                   key={id}
                   title={title}
                   vote_average={vote_average}
                   vote_count={vote_count}
-                  poster_path={poster_path}
+                  poster_path={backdrop_path}
+                  genre_ids={genre_ids}
                 />
               ),
             )}

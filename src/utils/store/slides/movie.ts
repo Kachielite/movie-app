@@ -1,15 +1,10 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {
-  Genre,
-  GenreResponse,
-  MovieQuery,
-  MovieResponse,
-  MovieState,
-} from "../type";
+import { GenreResponse, MovieQuery, MovieResponse, MovieState } from "../type";
 import {
   getAllMovieGenres,
   getDiscoveryMoviesList,
   getMoviesTrend,
+  getTrendingMovies,
 } from "../../services";
 import { AxiosResponse } from "axios";
 
@@ -23,6 +18,7 @@ const initialState: MovieState = {
     top_rated: { page: 1, results: [], isLoading: true },
     upcoming: { page: 1, results: [], isLoading: true },
     discovery: { page: 1, results: [], isLoading: true },
+    trending: { page: 1, results: [], isLoading: true },
   },
   genres: { genre: [], isLoading: true },
 };
@@ -56,6 +52,17 @@ export const fetchAllGenre = createAsyncThunk(
   async (): Promise<AxiosResponse<GenreResponse>> => {
     try {
       return await getAllMovieGenres();
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
+);
+
+export const fetchTrendingMovies = createAsyncThunk(
+  "movies/trending",
+  async (): Promise<AxiosResponse<MovieResponse>> => {
+    try {
+      return await getTrendingMovies();
     } catch (error) {
       return Promise.reject(error);
     }
@@ -110,6 +117,19 @@ export const movieSlice = createSlice({
       })
       .addCase(fetchAllGenre.rejected, (state) => {
         state.genres.isLoading = false;
+      })
+      .addCase(fetchTrendingMovies.pending, (state) => {
+        state.trends.trending.isLoading = true;
+      })
+      .addCase(fetchTrendingMovies.fulfilled, (state, { payload, meta }) => {
+        state.trends.trending.isLoading = false;
+        state.trends.trending.results = [
+          ...state.trends.trending.results,
+          ...payload.data.results,
+        ];
+      })
+      .addCase(fetchTrendingMovies.rejected, (state) => {
+        state.trends.trending.isLoading = false;
       });
   },
 });

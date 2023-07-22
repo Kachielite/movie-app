@@ -81,3 +81,11 @@ export const getAllMovieGenres = async (): Promise<AxiosResponse> => {
     return Promise.reject(e);
   }
 };
+
+export const getTrendingMovies = async (): Promise<AxiosResponse> => {
+  try {
+    return await customAxios(`${API_PATHS.trending}`);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};

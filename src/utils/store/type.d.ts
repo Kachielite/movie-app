@@ -64,6 +64,7 @@ export interface TrendsObj {
   top_rated: MovieStateData;
   upcoming: MovieStateData;
   discovery: MovieStateData;
+  trending: MovieStateData;
 }
 
 export interface GenreObj {
