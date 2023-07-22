@@ -20,7 +20,7 @@ const SkeletonLoader: FC = () => {
 
 const CardContainer: FC = () => {
   const { results, isLoading } = useAppSelector(
-    (state: RootState) => state.movie.popular,
+    (state: RootState) => state.movie.trends.popular,
   );
 
   return (

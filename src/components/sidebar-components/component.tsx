@@ -13,6 +13,8 @@ const MenuComponent: FC<Props> = ({ menu, title }) => {
   const menuHighlighter = (name: string): string => {
     if (name === "Home") {
       return "/";
+    } else if (name == "genre") {
+      return "/genre";
     } else {
       return `/category/${name.toLowerCase()}`;
     }
@@ -31,6 +33,9 @@ const MenuComponent: FC<Props> = ({ menu, title }) => {
                   "border-r-4 border-r-primary") ||
                 (pathname === "/" &&
                   name === "Home" &&
+                  "border-r-4 border-r-primary") ||
+                (pathname.includes("genre") &&
+                  name === "Genre" &&
                   "border-r-4 border-r-primary")
               }`}
               key={index}
@@ -38,14 +43,16 @@ const MenuComponent: FC<Props> = ({ menu, title }) => {
               {cloneElement(icon, {
                 stroke:
                   name.toLowerCase() === type ||
-                  (pathname === "/" && name === "Home")
+                  (pathname === "/" && name === "Home") ||
+                  (pathname.includes("genre") && name === "Genre")
                     ? "#F8B319"
                     : "#F9F9F9",
               })}
               <p
                 className={`text-[1.125rem] font-semibold group-hover:text-primary  ${
                   name.toLowerCase() === type ||
-                  (pathname === "/" && name === "Home")
+                  (pathname === "/" && name === "Home") ||
+                  (pathname.includes("genre") && name === "Genre")
                     ? "text-primary"
                     : "text-primaryText"
                 }`}

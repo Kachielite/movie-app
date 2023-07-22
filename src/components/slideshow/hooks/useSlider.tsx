@@ -4,7 +4,7 @@ import { useAppSelector } from "../../../utils/store/hooks";
 import { RootState } from "../../../utils/store";
 const useSlider = () => {
   const { results: moviesData, isLoading } = useAppSelector(
-    (state: RootState) => state.movie.now_playing,
+    (state: RootState) => state.movie.trends.now_playing,
   );
   const [slideIndex, setSlideIndex] = useState<number>(0);
   const [slide, setSlide] = useState<string | undefined>(

@@ -1,8 +1,12 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import Controls from "./controls";
 import CategoryCard from "./category-card";
-import { CategoryCardProps, Genre } from "./types";
+import { CategoryCardProps } from "../types";
 import GenreCard from "./genre-card";
+import { useAppSelector } from "../../../utils/store/hooks";
+import { RootState } from "../../../utils/store";
+import { Genre } from "../../../utils/store/type";
+import CategorySkeleton from "./category-skeleton";
 
 interface Props {
   movieData?: CategoryCardProps[];
@@ -17,6 +21,10 @@ const CategorySlide: FC<Props> = ({
   categoryTitle,
   type,
 }) => {
+  const { genre, isLoading: genreLoading } = useAppSelector(
+    (state: RootState) => state.movie.genres,
+  );
+
   return (
     <div className="flex flex-col justify-start space-y-[1.87rem] items-start w-full">
       <Controls title={categoryTitle} />
@@ -32,11 +40,13 @@ const CategorySlide: FC<Props> = ({
               length={movie.length}
             />
           ))}
-        {type === "genre" &&
-          genreData &&
-          genreData.map((genre: Genre, index: number) => (
-            <GenreCard key={index} genre={genre.genre} image={genre.image} />
-          ))}
+        {type === "genre" && genreLoading
+          ? Array(3)
+              .fill(true)
+              .map((_, i) => <CategorySkeleton key={i} />)
+          : genre.map(({ id, name }: Genre) => (
+              <GenreCard key={id} name={name} id={id} />
+            ))}
       </div>
     </div>
   );

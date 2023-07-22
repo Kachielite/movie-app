@@ -2,7 +2,7 @@ import React, { FC, useEffect } from "react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import MovieCard from "./movieCard";
 import { useAppDispatch } from "../../utils/store/hooks";
-import { discoverMovies } from "../../utils/store/slides/movie/movie";
+import { discoverMovies } from "../../utils/store/slides/movie";
 import useMovieCard from "./hooks/useMovieCard";
 
 const SkeletonLoader: FC = () => {

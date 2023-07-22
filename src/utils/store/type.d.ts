@@ -37,3 +37,46 @@ export interface MovieResponse {
   total_results: number;
   dates?: string;
 }
+
+interface Error {
+  errors: string[];
+  success: string;
+}
+
+export interface Genre {
+  id: number;
+  name: string;
+}
+
+export interface GenreResponse {
+  genres: Genre[];
+}
+
+interface MovieStateData {
+  page: number;
+  isLoading: boolean;
+  results: MovieData[];
+}
+
+export interface TrendsObj {
+  now_playing: MovieStateData;
+  popular: MovieStateData;
+  top_rated: MovieStateData;
+  upcoming: MovieStateData;
+  discovery: MovieStateData;
+}
+
+export interface GenreObj {
+  genre: Genre[];
+  isLoading: boolean;
+}
+
+export interface MovieState {
+  trends: TrendsObj;
+  genres: GenreObj;
+}
+
+export interface MovieQuery {
+  trend?: string;
+  page: number;
+}

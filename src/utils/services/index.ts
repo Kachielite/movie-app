@@ -73,3 +73,11 @@ export const getDiscoveryMoviesList = async (
     return Promise.reject(e);
   }
 };
+
+export const getAllMovieGenres = async (): Promise<AxiosResponse> => {
+  try {
+    return await customAxios(`${API_PATHS.getGenres("movie")}`);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};

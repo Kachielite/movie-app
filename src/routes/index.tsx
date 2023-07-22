@@ -3,6 +3,7 @@ import Home from "../pages/home";
 import { Route, Routes } from "react-router-dom";
 import Category from "../pages/category";
 import Movie from "../pages/movie";
+import GenrePage from "../pages/genre";
 
 const LocalRoute: FC = () => {
   return (
@@ -11,6 +12,8 @@ const LocalRoute: FC = () => {
       <Route path="/category/:type" element={<Category />} />
       <Route path="/movie/:id" element={<Movie />} />
       <Route path="/tv/:type" element={<Movie />} />
+      <Route path="/Genre/" element={<GenrePage />} />
+      <Route path="/Genre/:type" element={<Category />} />
     </Routes>
   );
 };

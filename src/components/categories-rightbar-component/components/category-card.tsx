@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { CategoryCardProps } from "./types";
-import { Plus } from "../Icon-components";
-import Btn from "../buttons";
+import { CategoryCardProps } from "../types";
+import { Plus } from "../../Icon-components";
+import Btn from "../../buttons";
 
 const CategoryCard: FC<CategoryCardProps> = ({
   name,
@@ -10,11 +10,11 @@ const CategoryCard: FC<CategoryCardProps> = ({
   image,
 }) => {
   return (
-    <div className="relative h-[8.06rem] w-[13.13rem] flex-shrink-0 overflow-hidden rounded-[0.5rem] bg-[linear-gradient(0deg,_rgba(22,_24,_30,_0.70)_0%,_rgba(22,_24,_30,_0.70)_100%)] flex justify-center items-center">
+    <div className="relative h-[8.06rem] w-full md:w-[13.13rem] flex-shrink-0 overflow-hidden rounded-[0.5rem] bg-[linear-gradient(0deg,_rgba(22,_24,_30,_0.70)_0%,_rgba(22,_24,_30,_0.70)_100%)] flex justify-center items-center">
       <img
         src={image}
         alt={name}
-        className="object-cover object-top w-full h-full h-full w-full"
+        className="object-cover object-top w-full h-full"
       />
       <div className="absolute z-40 flex flex-col justify-between items-center p-[0.63rem] h-full w-full">
         <p className="text-[1rem] font-extrabold w-full text-left text-white">

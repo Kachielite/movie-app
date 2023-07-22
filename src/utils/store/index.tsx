@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import selectionReducer from "./slides/selection";
-import movieReducer from "./slides/movie/movie";
+import movieReducer from "./slides/movie";
 
 export const store = configureStore({
   reducer: {

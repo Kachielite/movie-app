@@ -1,9 +1,6 @@
 import { useAppDispatch, useAppSelector } from "../../../utils/store/hooks";
 import { RootState } from "../../../utils/store";
-import {
-  discoverMovies,
-  setPage,
-} from "../../../utils/store/slides/movie/movie";
+import { discoverMovies, setPage } from "../../../utils/store/slides/movie";
 import { useBottomScrollListener } from "react-bottom-scroll-listener";
 import React, { useEffect, useState } from "react";
 
@@ -13,7 +10,7 @@ const useMovieCard = () => {
     results: movies,
     isLoading,
     page,
-  } = useAppSelector((state: RootState) => state.movie.discovery);
+  } = useAppSelector((state: RootState) => state.movie.trends.discovery);
   const scrollRef: React.LegacyRef<HTMLDivElement> | undefined =
     useBottomScrollListener(() => dispatch(discoverMovies({ page: page + 1 })));
 

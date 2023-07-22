@@ -2,7 +2,7 @@ import { FC, useEffect } from "react";
 import CardContainer from "./card-container";
 import { CategoryProps } from "./types";
 import { useAppDispatch } from "../../utils/store/hooks";
-import { fetchMoviesTrend } from "../../utils/store/slides/movie/movie";
+import { fetchMoviesTrend } from "../../utils/store/slides/movie";
 
 const CategoryComponent: FC<CategoryProps> = ({ title }) => {
   const dispatch = useAppDispatch();

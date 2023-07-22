@@ -3,7 +3,7 @@ import Slider from "./components/slider";
 import useSlider from "./hooks/useSlider";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { fetchMoviesTrend } from "../../utils/store/slides/movie/movie";
+import { fetchMoviesTrend } from "../../utils/store/slides/movie";
 import { useAppDispatch } from "../../utils/store/hooks";
 
 const Slideshow: FC = () => {
