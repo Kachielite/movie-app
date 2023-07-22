@@ -1,7 +1,7 @@
-import Btn from "../buttons";
-import { CircleBtn, NextBtn, Plus, PreviousBtn } from "../Icon-components";
+import Btn from "../../buttons";
+import { CircleBtn, NextBtn, Plus, PreviousBtn } from "../../Icon-components";
 import { FC } from "react";
-import { SliderControlActions } from "./types";
+import { SliderControlActions } from "../types";
 
 interface Props {
   slideHandler: (action: SliderControlActions) => void;
@@ -54,6 +54,18 @@ const Controls: FC<Props> = ({ slideIndex, slideHandler, caption }) => {
           </button>
           <button onClick={() => slideHandler({ index: 2 })}>
             <CircleBtn color={currentSlide(2)} />
+          </button>
+          <button onClick={() => slideHandler({ index: 3 })}>
+            <CircleBtn color={currentSlide(3)} />
+          </button>
+          <button onClick={() => slideHandler({ index: 4 })}>
+            <CircleBtn color={currentSlide(4)} />
+          </button>
+          <button onClick={() => slideHandler({ index: 5 })}>
+            <CircleBtn color={currentSlide(5)} />
+          </button>
+          <button onClick={() => slideHandler({ index: 6 })}>
+            <CircleBtn color={currentSlide(6)} />
           </button>
         </div>
         <Btn type="primary">Watch Now</Btn>

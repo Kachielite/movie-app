@@ -1,22 +1,14 @@
 import { customAxios } from "./customAxios";
 import { AxiosResponse } from "axios";
 
-const ENDPOINT = process.env.REACT_TMDB_ENDPOINT;
-
 type Movie = "movie";
 type TV = "tv";
 
-enum TrendType {
-  "now playing" = "now_playing",
-  popular = "popular",
-  "top rated" = "top_rated",
-  upcoming = "upcoming",
-  trending = "trending",
-}
+export const BASE_IMAGE_URL = process.env.REACT_APP_IMAGE_BASE_URL;
 
 const API_PATHS = {
-  getDiscoverList: (type: Movie | TV): string => {
-    return `/discover/${type}`;
+  getDiscoverList: (type: Movie | TV, page: number): string => {
+    return `/discover/${type}?page=${page}`;
   },
   findResource: (id: number): string => {
     return `/find/${id}`;
@@ -24,10 +16,9 @@ const API_PATHS = {
   getGenres: (type: Movie | TV): string => {
     return `/genre/${type}/list`;
   },
-  now_playing: `/movie/now_playing`,
-  popular: `/movie/popular`,
-  top_rated: `/movie/top_rated`,
-  upcoming: `/movie/upcoming`,
+  trends: (trends: string, page: number): string => {
+    return `/movie/${trends}?page=${page}`;
+  },
   trending: `/trending/movie/day`,
   details: (movie_id: number): string => {
     return `/movie/${movie_id}`;
@@ -62,10 +53,22 @@ const API_PATHS = {
   },
 };
 
-const fetchMovies = async (trend: TrendType): Promise<AxiosResponse> => {
+export const getMoviesTrend = async (
+  trends: string,
+  page: number,
+): Promise<AxiosResponse> => {
   try {
-    const response = await customAxios(`${ENDPOINT}${API_PATHS[trend]}`);
-    return response.data;
+    return await customAxios(`${API_PATHS.trends(trends, page)}`);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+export const getDiscoveryMoviesList = async (
+  page: number,
+): Promise<AxiosResponse> => {
+  try {
+    return await customAxios(`${API_PATHS.getDiscoverList("movie", page)}`);
   } catch (e) {
     return Promise.reject(e);
   }

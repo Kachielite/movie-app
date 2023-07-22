@@ -1,7 +1,7 @@
 import { FC } from "react";
 import Controls from "./controls";
 import Display from "./display";
-import useSlider from "../../utils/hooks/useSlider";
+import useSlider from "../hooks/useSlider";
 
 const Slider: FC = () => {
   const { slideHandler, slideIndex, slide, caption } = useSlider();
@@ -13,7 +13,7 @@ const Slider: FC = () => {
         caption={caption}
         slideIndex={slideIndex}
       />
-      <Display slide={slide} />
+      <Display slide={slide as string} />
     </div>
   );
 };

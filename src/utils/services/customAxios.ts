@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 
-const token = process.env.REACT_ACCESS_TOKEN;
+const BASE_URL = process.env.REACT_APP_TMDB_ENDPOINT;
+const token = process.env.REACT_APP_ACCESS_TOKEN;
 
 const options = {
   headers: {
@@ -10,7 +11,7 @@ const options = {
 };
 
 const customAxios = async (url: string): Promise<AxiosResponse> => {
-  return axios.get(url, options);
+  return axios.get(`${BASE_URL}${url}`, options);
 };
 
 export { customAxios };

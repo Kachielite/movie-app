@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { useParams } from "react-router-dom";
 import Layout from "../layout/layout";
-import MovieCard from "../components/movie-card";
 import DropdownComponent from "../components/dropdown";
 import { Funnel } from "../components/Icon-components";
+import MovieCardComponent from "../components/movie-card";
 
 const Category: FC = () => {
   const { type } = useParams();
@@ -19,7 +19,7 @@ const Category: FC = () => {
           <DropdownComponent />
         </div>
       </div>
-      <MovieCard />
+      <MovieCardComponent />
     </Layout>
   );
 };

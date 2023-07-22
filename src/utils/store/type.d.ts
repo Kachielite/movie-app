@@ -2,16 +2,16 @@ export interface MovieData {
   adult?: boolean;
   original_title?: string;
   popularity?: number;
-  release_date: string;
+  release_date?: string;
   title: string;
   video?: boolean;
-  backdrop_path: string;
+  backdrop_path?: string;
   genre_ids?: number[];
-  id: number;
+  id?: number;
   original_language?: string;
-  overview: string;
-  poster_path: string;
-  vote_average: number;
+  overview?: string;
+  poster_path?: string;
+  vote_average?: number;
   vote_count?: number;
 }
 
@@ -31,8 +31,9 @@ export interface TVData {
   vote_count?: number;
 }
 export interface MovieResponse {
-  pages: number;
+  page: number;
   results: T<MovieData[] | TVData[]>;
   total_pages: number;
   total_results: number;
+  dates?: string;
 }

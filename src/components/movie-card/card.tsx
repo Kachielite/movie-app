@@ -1,6 +1,6 @@
 import { FC } from "react";
 import RatingComponent from "../rating-component";
-import { MovieData, TVData } from "../../utils/store/type";
+import { BASE_IMAGE_URL } from "../../utils/services";
 
 interface Props {
   title: string;
@@ -17,13 +17,11 @@ const Card: FC<Props> = ({
   poster_path,
   vote_average,
 }) => {
-  const imageBaseURL = process.env.REACT_APP_IMAGE_BASE_URL;
-
   return (
     <div className="flex flex-col justify-start items-start flex-shrink-0 font-lato w-full md:w-[18.44rem] pb-10 px-2">
       <div className="relative w-full h-[26.06rem] rounded-t-[1.06rem] overflow-hidden">
         <img
-          src={`${imageBaseURL}${poster_path}`}
+          src={`${BASE_IMAGE_URL}${poster_path}`}
           alt={title}
           className="object-cover object-center w-full h-full"
         />
@@ -42,7 +40,7 @@ const Card: FC<Props> = ({
           </p>
         </div>
         <p className="text-[0.88rem] text-primaryText text-justify h-[2.5rem] overflow-hidden ">
-          {overview.substring(0, 100)}
+          {overview?.substring(0, 100)}
         </p>
       </div>
     </div>
