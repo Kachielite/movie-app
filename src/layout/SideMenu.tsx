@@ -1,8 +1,9 @@
 import { FC } from "react";
-import Logo from "../assets/images/logo.png";
 import { Close } from "../components/Icon-components";
 import Library from "../components/sidebar-components/library";
 import Menu from "../components/sidebar-components/menu";
+import { TbBrandPlanetscale } from "react-icons/tb";
+import { Link } from "react-router-dom";
 
 interface Props {
   setIsOpen: (state: boolean) => void;
@@ -17,13 +18,16 @@ const SideMenu: FC<Props> = ({ setIsOpen }) => {
       >
         <Close />
       </button>
-      <div className="w-[11rem] h-[4.63rem] flex flex-row justify-between items-center p-0">
-        <img src={Logo} alt="logo" className="w-[3.69rem] h-[3.69rem]" />
-        <div className="text-primary text-[2rem] font-['Luckiest Guy'] leading-none">
-          <p>HONEY</p>
+      <Link
+        to="/"
+        className="w-[11rem] h-[4.63rem] flex flex-row justify-between items-center p-0"
+      >
+        <TbBrandPlanetscale color="#F8B319" size="3.5rem" />
+        <div className="text-primary mr-4 md:mr-0 text-[2rem] font-['Luckiest Guy'] leading-none">
           <p>MOVIES</p>
+          <p>PLANET</p>
         </div>
-      </div>
+      </Link>
       <Menu />
       <Library />
     </div>

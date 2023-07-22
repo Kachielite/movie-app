@@ -1,38 +1,44 @@
 import { FC } from "react";
 import {
-  Recent,
   TopRated,
-  Downloaded,
-  Playlists,
   Watchlist,
-  Completed,
+  NowPlaying,
+  Popular,
+  Upcoming,
+  Trending,
 } from "../Icon-components";
 import MenuComponent from "./component";
 
 const MENU_ITEMS = [
   {
-    name: "Recent",
-    icon: <Recent />,
+    name: "Now Playing",
+    icon: <NowPlaying />,
+    link: "now_playing",
   },
   {
     name: "Top Rated",
     icon: <TopRated />,
+    link: "top_rated",
   },
   {
-    name: "Downloaded",
-    icon: <Downloaded />,
+    name: "Trending",
+    icon: <Trending />,
+    link: "trending",
   },
   {
-    name: "Playlists",
-    icon: <Playlists />,
+    name: "Popular",
+    icon: <Popular />,
+    link: "popular",
+  },
+  {
+    name: "Upcoming",
+    icon: <Upcoming />,
+    link: "upcoming",
   },
   {
     name: "Watchlist",
     icon: <Watchlist />,
-  },
-  {
-    name: "Completed",
-    icon: <Completed />,
+    link: "watchlist",
   },
 ];
 

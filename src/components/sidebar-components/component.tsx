@@ -22,10 +22,10 @@ const MenuComponent: FC<Props> = ({ menu, title }) => {
     <div className="flex flex-col justify-start items-start space-y-[1.52rem] font-lato w-full">
       <h1 className="text-[#BABABA] font-bold">{title}</h1>
       <div className="flex flex-col justify-start items-start space-y-[1.62rem] w-full">
-        {menu.map(({ icon, name }: MenuItem, index) => {
+        {menu.map(({ icon, name, link }: MenuItem, index) => {
           return (
             <Link
-              to={menuHighlighter(name)}
+              to={menuHighlighter(link)}
               className={`group flex flex-row space-x-[0.94rem] w-full cursor-pointer hover:border-r-4 hover:border-r-primary ${
                 (name.toLowerCase() === type &&
                   "border-r-4 border-r-primary") ||
