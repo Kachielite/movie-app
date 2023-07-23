@@ -28,19 +28,19 @@ const CategoriesRightBarComponent: FC = () => {
         movieData={trendingData}
         categoryTitle="Trending"
         type="movies"
-        isLoading={trendingLoading}
+        isLoading={trendingLoading as boolean}
       />
       <CategorySlide
         movieData={upcomingData}
         categoryTitle="Upcoming"
         type="movies"
-        isLoading={upcomingLoading}
+        isLoading={upcomingLoading as boolean}
       />
       <CategorySlide
         categoryTitle="Genre"
         type="genre"
         genreData={genre}
-        isLoading={genreLoading}
+        isLoading={genreLoading as boolean}
       />
     </div>
   );

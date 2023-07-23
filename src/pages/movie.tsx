@@ -6,6 +6,7 @@ import FilmHouse from "../assets/images/producer-housing.png";
 import { Link, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../utils/store/hooks";
 import {
+  fetchMovieCollection,
   fetchMovieDetails,
   fetchSpecificDetails,
 } from "../utils/store/slides/movie";
@@ -15,19 +16,24 @@ import CreditComponent from "../components/credit-component";
 import { RotatingLines } from "react-loader-spinner";
 import { Crew } from "../utils/store/type";
 import ReviewComponent from "../components/review-component";
+import SimilarMovieComponent from "../components/similar-movie-component";
 
 const Movie: FC = () => {
   const { id } = useParams<string>();
   const dispatch = useAppDispatch();
-  const movieDetails = useAppSelector(
-    (state: RootState) => state.movie.details.details,
-  );
-  const { isLoading, credits, reviews } = useAppSelector(
-    (state: RootState) => state.movie.details,
-  );
+  const {
+    isLoading,
+    credits,
+    reviews,
+    details: movieDetails,
+    similar,
+    collection,
+  } = useAppSelector((state: RootState) => state.movie.details);
   const { crew, cast } = credits;
   const { results: reviewData } = reviews;
-
+  const { results: similarMoviesData } = similar;
+  const { parts, name: collectionName } = collection;
+  const collectionId = movieDetails?.belongs_to_collection?.id as string;
   const director = (): Crew[] =>
     crew?.filter((c) => c.job === "Director") as Array<Crew>;
   const writer = (): Crew[] =>
@@ -38,8 +44,15 @@ const Movie: FC = () => {
       dispatch(fetchMovieDetails({ id: id }));
       dispatch(fetchSpecificDetails({ id: id, infoType: "credits" }));
       dispatch(fetchSpecificDetails({ id: id, infoType: "reviews" }));
+      dispatch(fetchSpecificDetails({ id: id, infoType: "similar" }));
     }
-  }, []);
+  }, [id]);
+
+  useEffect(() => {
+    if (collectionId) {
+      dispatch(fetchMovieCollection({ collection_id: collectionId }));
+    }
+  }, [collectionId]);
 
   return (
     <div className="w-full min-h-screen flex justify-center items-center">
@@ -67,7 +80,9 @@ const Movie: FC = () => {
             <img
               src={`${BASE_IMAGE_URL}${movieDetails.backdrop_path}`}
               alt="Movie Background"
-              className="h-full w-full object-cover object-top"
+              className={`${
+                movieDetails.backdrop_path ? "h-full" : "h-[54rem]"
+              } w-full object-cover object-top`}
             />
             <div className="absolute z-40 w-full h-full flex flex-col justify-start items-start px-4 md:px-[3.12rem] pt-4  bg-[linear-gradient(0deg,_rgba(22,_24,_30,_0.70)_0%,_rgba(22,_24,_30,_0.70)_100%)]">
               <div className="flex flex-row space-x-[1.31rem] items-center justify-center">
@@ -197,15 +212,23 @@ const Movie: FC = () => {
               </p>
             </div>
           </div>
-          {/*<div className="py-10 px-4 md:px-[5.12rem]">*/}
-          {/*  <CategoryComponent title="Similar Movies" />*/}
-          {/*</div>*/}
           {cast && crew && (
             <CreditComponent cast={cast} crew={crew} isLoading={isLoading} />
           )}
+          <div className="w-full">
+            {parts && collectionName && (
+              <SimilarMovieComponent movieData={parts} title={collectionName} />
+            )}
+          </div>
           {reviewData && reviewData?.length > 0 && (
             <ReviewComponent results={reviewData} />
           )}
+          <div className="w-full">
+            <SimilarMovieComponent
+              movieData={similarMoviesData}
+              title="Similar Movies"
+            />
+          </div>
         </div>
       )}
     </div>

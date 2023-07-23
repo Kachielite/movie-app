@@ -1,16 +1,16 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
-  CreditResponse,
+  CollectionResponse,
   GenreResponse,
   MovieDetails,
   MovieQuery,
   MovieResponse,
   MovieState,
-  ReviewResponse,
 } from "../type";
 import {
   getAllMovieGenres,
   getDiscoveryMoviesList,
+  getMovieCollection,
   getMovieDetails,
   getMoviesTrend,
   getSpecificDetails,
@@ -24,7 +24,14 @@ type DetailsObjKey = keyof typeof initialState.details;
 let info: DetailsObjKey;
 
 const initialState: MovieState = {
-  details: { details: {}, isLoading: true, credits: {}, reviews: {} },
+  details: {
+    details: {},
+    isLoading: true,
+    credits: {},
+    reviews: {},
+    similar: { page: 1, results: [] },
+    collection: {},
+  },
   genres: { genre: [], isLoading: true },
   trends: {
     now_playing: { page: 1, results: [], isLoading: true },
@@ -65,6 +72,20 @@ export const fetchAllGenre = createAsyncThunk(
   async (): Promise<AxiosResponse<GenreResponse>> => {
     try {
       return await getAllMovieGenres();
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
+);
+
+export const fetchMovieCollection = createAsyncThunk(
+  "movies/collection",
+  async (query: {
+    collection_id: string;
+  }): Promise<AxiosResponse<CollectionResponse>> => {
+    const { collection_id: collectionID } = query;
+    try {
+      return await getMovieCollection(collectionID);
     } catch (error) {
       return Promise.reject(error);
     }
@@ -190,6 +211,16 @@ export const movieSlice = createSlice({
         state.details[info] = payload.data;
       })
       .addCase(fetchSpecificDetails.rejected, (state) => {
+        state.details.isLoading = false;
+      })
+      .addCase(fetchMovieCollection.pending, (state) => {
+        state.details.isLoading = true;
+      })
+      .addCase(fetchMovieCollection.fulfilled, (state, { payload, meta }) => {
+        state.details.isLoading = false;
+        state.details.collection = payload.data;
+      })
+      .addCase(fetchMovieCollection.rejected, (state) => {
         state.details.isLoading = false;
       });
   },

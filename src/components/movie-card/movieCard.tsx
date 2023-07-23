@@ -8,6 +8,7 @@ const Movie: FC<{ data: MovieData[] }> = ({ data }) => {
   return data?.map(
     ({ title, release_date, overview, backdrop_path, vote_average, id }) => (
       <Card
+        id={id as number}
         key={id}
         title={title}
         release_date={release_date as string}
@@ -23,6 +24,7 @@ const TV: FC<{ data: TVData[] }> = ({ data }) => {
   return data?.map(
     ({ name, first_air_date, overview, backdrop_path, vote_average, id }) => (
       <Card
+        id={id}
         key={id}
         title={name}
         release_date={first_air_date}

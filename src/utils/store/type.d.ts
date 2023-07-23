@@ -32,7 +32,7 @@ export interface TVData {
 }
 
 interface BelongsToCollection {
-  id: number;
+  id: string;
   name: string;
   poster_path: string;
   backdrop_path: string;
@@ -169,7 +169,7 @@ export interface GenreResponse {
 
 interface MovieStateData {
   page: number;
-  isLoading: boolean;
+  isLoading?: boolean;
   results: MovieData[];
 }
 
@@ -187,11 +187,21 @@ export interface GenreObj {
   isLoading: boolean;
 }
 
+export interface CollectionResponse {
+  id?: string;
+  name?: string;
+  poster_path?: string;
+  backdrop_path?: string;
+  parts?: MovieData[];
+}
+
 export interface MovieDetailsObj {
   details: MovieDetails;
   isLoading: boolean;
   credits: CreditResponse;
   reviews: ReviewResponse;
+  similar: MovieStateData;
+  collection: CollectionResponse;
 }
 
 export interface MovieState {

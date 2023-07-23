@@ -28,33 +28,8 @@ const API_PATHS = {
   info: (movie_id: string, type: string): string => {
     return `/movie/${movie_id}/${type}`;
   },
-
-  getAlternativeTitle: (movie_id: number): string => {
-    return `/movie/${movie_id}/alternative_titles`;
-  },
-  getCredits: (movie_id: number): string => {
-    return `/movie/${movie_id}/credits`;
-  },
-  getImages: (movie_id: number): string => {
-    return `/movie/${movie_id}/images`;
-  },
-  getKeywords: (movie_id: number): string => {
-    return `/movie/${movie_id}/keywords`;
-  },
-  getRecommendations: (movie_id: number): string => {
-    return `/movie/${movie_id}/recommendations`;
-  },
-  getReviews: (movie_id: number): string => {
-    return `/movie/${movie_id}/reviews`;
-  },
-  getSimilar: (movie_id: number): string => {
-    return `/movie/${movie_id}/similar`;
-  },
-  getTranslations: (movie_id: number): string => {
-    return `/movie/${movie_id}/translations`;
-  },
-  getVideos: (movie_id: number): string => {
-    return `/movie/${movie_id}/videos`;
+  collection: (collection_id: string): string => {
+    return `/collection/${collection_id}`;
   },
 };
 
@@ -111,6 +86,16 @@ export const getSpecificDetails = async (
 ): Promise<AxiosResponse> => {
   try {
     return await customAxios(`${API_PATHS.info(movie_id, infoType)}`);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+export const getMovieCollection = async (
+  collection_id: string,
+): Promise<AxiosResponse> => {
+  try {
+    return await customAxios(`${API_PATHS.collection(collection_id)}`);
   } catch (e) {
     return Promise.reject(e);
   }

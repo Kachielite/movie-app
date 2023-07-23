@@ -1,8 +1,10 @@
 import { FC } from "react";
 import RatingComponent from "../rating-component";
 import { BASE_IMAGE_URL } from "../../utils/services";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
 interface Props {
+  id: number;
   title: string;
   release_date: string;
   overview: string;
@@ -11,14 +13,22 @@ interface Props {
 }
 
 const Card: FC<Props> = ({
+  id,
   title,
   release_date,
   overview,
   poster_path,
   vote_average,
 }) => {
+  const { pathname } = useLocation();
+
   return (
-    <div className="flex flex-col justify-start items-start flex-shrink-0 font-lato w-full md:w-[18.44rem] pb-10 px-2">
+    <Link
+      to={`/movie/${id}`}
+      className={`flex flex-col justify-start items-start flex-shrink-0 font-lato ${
+        pathname.includes("movie") ? "w-[18.44rem]" : "w-full md:w-[18.44rem]"
+      }  pb-10 px-2`}
+    >
       <div className="relative w-full h-[26.06rem] rounded-t-[1.06rem] overflow-hidden">
         <img
           src={`${BASE_IMAGE_URL}${poster_path}`}
@@ -43,7 +53,7 @@ const Card: FC<Props> = ({
           {overview?.substring(0, 100)}
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 
