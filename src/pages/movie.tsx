@@ -52,7 +52,7 @@ const Movie: FC = () => {
     if (collectionId) {
       dispatch(fetchMovieCollection({ collection_id: collectionId }));
     }
-  }, [collectionId]);
+  }, [collectionId, id]);
 
   return (
     <div className="w-full min-h-screen flex justify-center items-center">

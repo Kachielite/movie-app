@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Category from "../pages/category";
 import Movie from "../pages/movie";
 import GenrePage from "../pages/genre";
+import Person from "../pages/person";
 
 const LocalRoute: FC = () => {
   return (
@@ -11,8 +12,9 @@ const LocalRoute: FC = () => {
       <Route path="/" element={<Home />} />
       <Route path="/category/:type" element={<Category />} />
       <Route path="/movie/:id" element={<Movie />} />
-      <Route path="/Genre/" element={<GenrePage />} />
-      <Route path="/Genre/:type" element={<Category />} />
+      <Route path="/genre/" element={<GenrePage />} />
+      <Route path="/genre/:type" element={<Category />} />
+      <Route path="/person/:id" element={<Person />} />
     </Routes>
   );
 };

@@ -6,6 +6,8 @@ import {
   MovieQuery,
   MovieResponse,
   MovieState,
+  PersonMovieCreditResponse,
+  PersonResponse,
 } from "../type";
 import {
   getAllMovieGenres,
@@ -13,6 +15,8 @@ import {
   getMovieCollection,
   getMovieDetails,
   getMoviesTrend,
+  getPersonDetails,
+  getPersonMovieCredits,
   getSpecificDetails,
   getTrendingMovies,
 } from "../../services";
@@ -33,6 +37,7 @@ const initialState: MovieState = {
     collection: {},
   },
   genres: { genre: [], isLoading: true },
+  person: { isLoading: true, details: {}, credits: {} },
   trends: {
     now_playing: { page: 1, results: [], isLoading: true },
     popular: { page: 1, results: [], isLoading: true },
@@ -124,6 +129,34 @@ export const fetchSpecificDetails = createAsyncThunk(
     const { id, infoType } = query;
     try {
       return await getSpecificDetails(id, infoType);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
+);
+
+export const fetchPersonDetails = createAsyncThunk(
+  "person/details",
+  async (query: {
+    personId: string;
+  }): Promise<AxiosResponse<PersonResponse>> => {
+    const { personId } = query;
+    try {
+      return await getPersonDetails(personId);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
+);
+
+export const fetchPersonMovieCredits = createAsyncThunk(
+  "person/movie-credits",
+  async (query: {
+    personId: string;
+  }): Promise<AxiosResponse<PersonMovieCreditResponse>> => {
+    const { personId } = query;
+    try {
+      return await getPersonMovieCredits(personId);
     } catch (error) {
       return Promise.reject(error);
     }
@@ -222,6 +255,26 @@ export const movieSlice = createSlice({
       })
       .addCase(fetchMovieCollection.rejected, (state) => {
         state.details.isLoading = false;
+      })
+      .addCase(fetchPersonDetails.pending, (state) => {
+        state.person.isLoading = true;
+      })
+      .addCase(fetchPersonDetails.fulfilled, (state, { payload }) => {
+        state.person.isLoading = false;
+        state.person.details = payload.data;
+      })
+      .addCase(fetchPersonDetails.rejected, (state) => {
+        state.person.isLoading = false;
+      })
+      .addCase(fetchPersonMovieCredits.pending, (state) => {
+        state.person.isLoading = true;
+      })
+      .addCase(fetchPersonMovieCredits.fulfilled, (state, { payload }) => {
+        state.person.isLoading = false;
+        state.person.credits = payload.data;
+      })
+      .addCase(fetchPersonMovieCredits.rejected, (state) => {
+        state.person.isLoading = false;
       });
   },
 });

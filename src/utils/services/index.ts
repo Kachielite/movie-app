@@ -31,6 +31,13 @@ const API_PATHS = {
   collection: (collection_id: string): string => {
     return `/collection/${collection_id}`;
   },
+  persons: "/person/popular",
+  person: (person_id: string): string => {
+    return `/person/${person_id}`;
+  },
+  personMovieCredits: (person_id: string): string => {
+    return `/person/${person_id}/movie_credits`;
+  },
 };
 
 export const getMoviesTrend = async (
@@ -96,6 +103,26 @@ export const getMovieCollection = async (
 ): Promise<AxiosResponse> => {
   try {
     return await customAxios(`${API_PATHS.collection(collection_id)}`);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+export const getPersonDetails = async (
+  person_id: string,
+): Promise<AxiosResponse> => {
+  try {
+    return await customAxios(`${API_PATHS.person(person_id)}`);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+export const getPersonMovieCredits = async (
+  person_id: string,
+): Promise<AxiosResponse> => {
+  try {
+    return await customAxios(`${API_PATHS.personMovieCredits(person_id)}`);
   } catch (e) {
     return Promise.reject(e);
   }
