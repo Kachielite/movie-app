@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
+  CreditResponse,
   GenreResponse,
   MovieDetails,
   MovieQuery,
@@ -11,6 +12,7 @@ import {
   getDiscoveryMoviesList,
   getMovieDetails,
   getMoviesTrend,
+  getSpecificDetails,
   getTrendingMovies,
 } from "../../services";
 import { AxiosResponse } from "axios";
@@ -19,7 +21,7 @@ type ObjectKey = keyof typeof initialState.trends;
 let arg: ObjectKey;
 
 const initialState: MovieState = {
-  details: { details: {}, isLoading: true },
+  details: { details: {}, isLoading: true, credits: {} },
   genres: { genre: [], isLoading: true },
   trends: {
     now_playing: { page: 1, results: [], isLoading: true },
@@ -83,6 +85,21 @@ export const fetchMovieDetails = createAsyncThunk(
     const { id } = query;
     try {
       return await getMovieDetails(id);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
+);
+
+export const fetchSpecificDetails = createAsyncThunk(
+  "movies/specific-details",
+  async (query: {
+    id: string;
+    infoType: string;
+  }): Promise<AxiosResponse<CreditResponse>> => {
+    const { id, infoType } = query;
+    try {
+      return await getSpecificDetails(id, infoType);
     } catch (error) {
       return Promise.reject(error);
     }
@@ -155,10 +172,20 @@ export const movieSlice = createSlice({
         state.details.isLoading = true;
       })
       .addCase(fetchMovieDetails.fulfilled, (state, { payload }) => {
-        state.trends.trending.isLoading = false;
+        state.details.isLoading = false;
         state.details.details = payload.data;
       })
       .addCase(fetchMovieDetails.rejected, (state) => {
+        state.details.isLoading = false;
+      })
+      .addCase(fetchSpecificDetails.pending, (state) => {
+        state.details.isLoading = true;
+      })
+      .addCase(fetchSpecificDetails.fulfilled, (state, { payload }) => {
+        state.details.isLoading = false;
+        state.details.credits = payload.data;
+      })
+      .addCase(fetchSpecificDetails.rejected, (state) => {
         state.details.isLoading = false;
       });
   },

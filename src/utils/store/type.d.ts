@@ -56,6 +56,42 @@ interface SpokenLanguage {
   name: string;
 }
 
+export interface Cast {
+  adult?: boolean;
+  gender?: number;
+  id: string;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity?: string;
+  profile_path: string;
+  cast_id?: number;
+  character?: string;
+  credit_id?: string;
+  order: number;
+}
+
+export interface Crew {
+  adult?: boolean;
+  gender?: number;
+  id: string;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity?: string;
+  profile_path: string;
+  cast_id?: number;
+  credit_id?: number;
+  department: string;
+  job?: string;
+}
+
+export interface CreditResponse {
+  id?: string;
+  cast?: Cast[];
+  crew?: Crew[];
+}
+
 export interface MovieDetails {
   adult?: boolean;
   backdrop_path?: string;
@@ -129,6 +165,7 @@ export interface GenreObj {
 export interface MovieDetailsObj {
   details: MovieDetails;
   isLoading: boolean;
+  credits: CreditResponse;
 }
 
 export interface MovieState {

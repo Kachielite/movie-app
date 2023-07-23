@@ -27,7 +27,17 @@ const Movie: FC = () => {
 
   return (
     <div className="w-full h-full  bg-black flex flex-col justify-start items-start font-lato">
-      <div className="w-full h-[108rem] lg:h-full flex justify-start items-start relative">
+      <div
+        className={`w-full ${
+          movieDetails?.overview && movieDetails?.overview?.length < 230
+            ? "h-[87rem]"
+            : movieDetails?.overview &&
+              (movieDetails?.overview?.length > 231 ||
+                movieDetails?.overview?.length > 350)
+            ? "h-[98rem]"
+            : "h-[108rem]"
+        } lg:h-full flex justify-start items-start relative`}
+      >
         <img
           src={`${BASE_IMAGE_URL}${movieDetails.backdrop_path}`}
           alt="Movie Background"
@@ -57,10 +67,10 @@ const Movie: FC = () => {
                 {movieDetails?.vote_count} votes
               </p>
               <img src={FilmHouse} alt="Producing House" />
-              <p className="text-[1.3rem] md:text-[1.88rem] font-bold text-primaryText w-full md:w-[49.75rem]">
+              <p className="text-[1.3rem] md:text-[1.88rem] text-justify lg:text-left font-bold text-primaryText w-full md:w-[49.75rem]">
                 {movieDetails?.overview}
               </p>
-              <div className="flex flex-col md:flex-row  items-start md:items-center space-y-5 md:space-y-0 md:space-x-[2.85rem] justify-start w-full">
+              <div className="flex flex-col md:flex-row  items-start md:items-center space-y-7 md:space-y-0 md:space-x-[2.85rem] justify-start w-full">
                 <Btn type="cta2">
                   <div className="flex flex-row items-center space-x-[0.9rem] justify-center ">
                     <Plus />
@@ -86,42 +96,78 @@ const Movie: FC = () => {
         </div>
       </div>
       <div className="flex flex-col justify-start items-start w-full text-primaryText border-y-[0.063rem] border-[rgba(255, 255, 255, 0.1)]">
-        <div className="flex flex-col lg:flex-row lg:flex-wrap justify-between items-start lg:items-center py-[0.94rem] w-full font-bold px-4 md:px-[6.12rem] text-[1rem]">
-          <p className="text-primary">
+        <div className="flex flex-col lg:flex-row lg:flex-wrap justify-between  items-start lg:items-center py-[0.94rem] w-full font-bold px-4 md:px-[6.12rem] text-[1rem]">
+          <p className="text-primary lg:mr-2">
             Status:{" "}
             <span className="font-normal text-primaryText">
               {movieDetails?.status}
             </span>
           </p>
-          <p className="text-primary">
+          <p className="text-primary lg:mr-2">
             Released Date:{" "}
             <span className="font-normal text-primaryText">
               {movieDetails?.release_date}
             </span>
           </p>
-          <p className="text-primary">
+          <p className="text-primary lg:mr-2">
             Runtime:{" "}
             <span className="font-normal text-primaryText">
               {movieDetails?.runtime} mins
             </span>
           </p>
-          <p className="text-primary">
+          <p className="text-primary lg:mr-2">
             Director:{" "}
             <span className="font-normal text-primaryText">
               Christopher McQuarrie
             </span>
           </p>
-          <p className="text-primary">
+          <p className="text-primary lg:mr-2">
             Writer:{" "}
             <span className="font-normal text-primaryText">
               Christopher McQuarrie, Erik Jendresen
             </span>
           </p>
+          <p className="text-primary lg:mr-2">
+            Spoken language:{" "}
+            <span className="font-normal text-primaryText">
+              {movieDetails?.spoken_languages
+                ?.map((language) => language.name)
+                .join(", ")}
+            </span>
+          </p>
+          <p className="text-primary lg:mr-2">
+            Genres:{" "}
+            <span className="font-normal text-primaryText">
+              {movieDetails?.genres?.map((genre) => genre.name).join(", ")}
+            </span>
+          </p>
+          <p className="text-primary lg:mr-2">
+            Original title:{" "}
+            <span className="font-normal text-primaryText">
+              {movieDetails?.title}
+            </span>
+          </p>
+          <p className="text-primary lg:mr-2">
+            Production Companies:{" "}
+            <span className="font-normal text-primaryText">
+              {movieDetails?.production_companies
+                ?.map((company) => company.name)
+                .join(", ")}
+            </span>
+          </p>
+          <p className="text-primary lg:mr-2">
+            Production Countries:{" "}
+            <span className="font-normal text-primaryText">
+              {movieDetails?.production_countries
+                ?.map((country) => country.name)
+                .join(", ")}
+            </span>
+          </p>
         </div>
       </div>
-      <div className="py-10 px-4 md:px-[5.12rem]">
-        <CategoryComponent title="Similar Movies" />
-      </div>
+      {/*<div className="py-10 px-4 md:px-[5.12rem]">*/}
+      {/*  <CategoryComponent title="Similar Movies" />*/}
+      {/*</div>*/}
     </div>
   );
 };
