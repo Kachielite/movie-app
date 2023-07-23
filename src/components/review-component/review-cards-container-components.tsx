@@ -18,7 +18,6 @@ const ReviewCardsContainerComponents: FC<{ reviews: Review[] }> = ({
     <div className="flex flex-col justify-center items-center w-full space-x-2">
       <div className="flex flex-row flex-wrap w-full justify-between ">
         {reviews
-          .slice(0, limit)
           .map(({ author_details, created_at, content, id }: Review) => (
             <ReviewCard
               key={id}
@@ -29,14 +28,17 @@ const ReviewCardsContainerComponents: FC<{ reviews: Review[] }> = ({
               content={content}
             />
           ))
+          .slice(0, limit)
           .reverse()}
       </div>
-      <button
-        className="p-1 px-2 outline-0 text-lg text-primary"
-        onClick={loadMoreHandler}
-      >
-        {limit !== 4 ? "See less reviews" : "See all reviews"}
-      </button>
+      {reviews.length > 4 && (
+        <button
+          className="p-1 px-2 outline-0 text-lg text-primary"
+          onClick={loadMoreHandler}
+        >
+          {limit !== 4 ? "See less reviews" : "See all reviews"}
+        </button>
+      )}
     </div>
   );
 };

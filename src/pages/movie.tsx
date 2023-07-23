@@ -203,7 +203,9 @@ const Movie: FC = () => {
           {cast && crew && (
             <CreditComponent cast={cast} crew={crew} isLoading={isLoading} />
           )}
-          {reviewData && <ReviewComponent results={reviewData} />}
+          {reviewData && reviewData?.length > 0 && (
+            <ReviewComponent results={reviewData} />
+          )}
         </div>
       )}
     </div>
