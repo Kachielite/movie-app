@@ -226,7 +226,7 @@ const Movie: FC = () => {
           <div className="w-full">
             <SimilarMovieComponent
               movieData={similarMoviesData}
-              title="Similar Movies"
+              title="Recommendations"
             />
           </div>
         </div>
