@@ -11,7 +11,7 @@ interface Props {
 
 const creditCard: FC<Props> = ({ id, name, job, image }) => {
   return (
-    <div className="w-fit rounded overflow-hidden shadow-lg">
+    <div className="w-fit h  rounded overflow-hidden shadow-lg">
       <img className="w-fit" src={`${BASE_IMAGE_URL}${image}`} alt={name} />
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{name}</div>

@@ -66,7 +66,7 @@ export interface Cast {
   popularity?: string;
   profile_path: string;
   cast_id?: number;
-  character?: string;
+  character: string;
   credit_id?: string;
   order: number;
 }
@@ -83,7 +83,7 @@ export interface Crew {
   cast_id?: number;
   credit_id?: number;
   department: string;
-  job?: string;
+  job: string;
 }
 
 export interface CreditResponse {

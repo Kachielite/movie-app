@@ -1,6 +1,4 @@
 import { FC, useEffect } from "react";
-import Loki from "../../assets/images/loki.png";
-import Chernobyl from "../../assets/images/chernobyl.png";
 import CategorySlide from "./components/category-slide";
 import {
   fetchAllGenre,
@@ -9,32 +7,6 @@ import {
 } from "../../utils/store/slides/movie";
 import { useAppDispatch, useAppSelector } from "../../utils/store/hooks";
 import { RootState } from "../../utils/store";
-
-const moviesData = [
-  {
-    name: "Loki",
-    category: "Superhero",
-    length: 6,
-    image: Loki,
-  },
-  {
-    name: "Chernobyl",
-    category: "Mini Series",
-    length: 5,
-    image: Chernobyl,
-  },
-];
-
-const genreData = [
-  {
-    genre: "Anime",
-    image: Chernobyl,
-  },
-  {
-    genre: "Action",
-    image: Loki,
-  },
-];
 
 const CategoriesRightBarComponent: FC = () => {
   const dispatch = useAppDispatch();
