@@ -11,7 +11,6 @@ const LocalRoute: FC = () => {
       <Route path="/" element={<Home />} />
       <Route path="/category/:type" element={<Category />} />
       <Route path="/movie/:id" element={<Movie />} />
-      <Route path="/tv/:type" element={<Movie />} />
       <Route path="/Genre/" element={<GenrePage />} />
       <Route path="/Genre/:type" element={<Category />} />
     </Routes>

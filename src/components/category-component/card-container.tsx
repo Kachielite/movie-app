@@ -49,6 +49,7 @@ const CardContainer: FC = () => {
                   vote_count={vote_count}
                   poster_path={backdrop_path}
                   genre_ids={genre_ids}
+                  id={id}
                 />
               ),
             )}

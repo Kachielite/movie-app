@@ -20,7 +20,7 @@ const API_PATHS = {
     return `/movie/${trends}?page=${page}`;
   },
   trending: `/trending/movie/day`,
-  details: (movie_id: number): string => {
+  details: (movie_id: string): string => {
     return `/movie/${movie_id}`;
   },
 
@@ -85,6 +85,16 @@ export const getAllMovieGenres = async (): Promise<AxiosResponse> => {
 export const getTrendingMovies = async (): Promise<AxiosResponse> => {
   try {
     return await customAxios(`${API_PATHS.trending}`);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+export const getMovieDetails = async (
+  movie_id: string,
+): Promise<AxiosResponse> => {
+  try {
+    return await customAxios(`${API_PATHS.details(movie_id)}`);
   } catch (e) {
     return Promise.reject(e);
   }

@@ -6,6 +6,7 @@ import { MovieData } from "../../utils/store/type";
 import { BASE_IMAGE_URL } from "../../utils/services";
 import { useAppSelector } from "../../utils/store/hooks";
 import { RootState } from "../../utils/store";
+import { Link } from "react-router-dom";
 
 const Card: FC<MovieData> = ({
   title,
@@ -13,6 +14,7 @@ const Card: FC<MovieData> = ({
   vote_average,
   vote_count,
   genre_ids,
+  id,
 }) => {
   const { genre } = useAppSelector((state: RootState) => state.movie.genres);
 
@@ -44,7 +46,9 @@ const Card: FC<MovieData> = ({
             <Btn type="arrow">
               <Plus />
             </Btn>
-            <Btn type="third">More Info</Btn>
+            <Btn type="third">
+              <Link to={`/movie/${id}`}>More Info</Link>
+            </Btn>
           </div>
         </div>
       </div>
