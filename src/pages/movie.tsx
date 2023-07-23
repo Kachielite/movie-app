@@ -14,6 +14,7 @@ import { BASE_IMAGE_URL } from "../utils/services";
 import CreditComponent from "../components/credit-component";
 import { RotatingLines } from "react-loader-spinner";
 import { Crew } from "../utils/store/type";
+import ReviewComponent from "../components/review-component";
 
 const Movie: FC = () => {
   const { id } = useParams<string>();
@@ -21,10 +22,11 @@ const Movie: FC = () => {
   const movieDetails = useAppSelector(
     (state: RootState) => state.movie.details.details,
   );
-  const { isLoading, credits } = useAppSelector(
+  const { isLoading, credits, reviews } = useAppSelector(
     (state: RootState) => state.movie.details,
   );
   const { crew, cast } = credits;
+  const { results: reviewData } = reviews;
 
   const director = (): Crew[] =>
     crew?.filter((c) => c.job === "Director") as Array<Crew>;
@@ -35,6 +37,7 @@ const Movie: FC = () => {
     if (id) {
       dispatch(fetchMovieDetails({ id: id }));
       dispatch(fetchSpecificDetails({ id: id, infoType: "credits" }));
+      dispatch(fetchSpecificDetails({ id: id, infoType: "reviews" }));
     }
   }, []);
 
@@ -142,16 +145,16 @@ const Movie: FC = () => {
                 Director:{" "}
                 <span className="font-normal text-primaryText">
                   {director()
-                    .map((d) => d.name)
+                    ?.map((d) => d.name)
                     .join(", ")}
                 </span>
               </p>
-              {writer().length !== 0 && (
+              {writer()?.length !== 0 && (
                 <p className="text-primary lg:mr-2">
                   Writer:{" "}
                   <span className="font-normal text-primaryText">
                     {writer()
-                      .map((d) => d.name)
+                      ?.map((d) => d.name)
                       .join(", ")}
                   </span>
                 </p>
@@ -200,6 +203,7 @@ const Movie: FC = () => {
           {cast && crew && (
             <CreditComponent cast={cast} crew={crew} isLoading={isLoading} />
           )}
+          {reviewData && <ReviewComponent results={reviewData} />}
         </div>
       )}
     </div>

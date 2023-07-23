@@ -6,6 +6,7 @@ import {
   MovieQuery,
   MovieResponse,
   MovieState,
+  ReviewResponse,
 } from "../type";
 import {
   getAllMovieGenres,
@@ -19,9 +20,11 @@ import { AxiosResponse } from "axios";
 
 type ObjectKey = keyof typeof initialState.trends;
 let arg: ObjectKey;
+type DetailsObjKey = keyof typeof initialState.details;
+let info: DetailsObjKey;
 
 const initialState: MovieState = {
-  details: { details: {}, isLoading: true, credits: {} },
+  details: { details: {}, isLoading: true, credits: {}, reviews: {} },
   genres: { genre: [], isLoading: true },
   trends: {
     now_playing: { page: 1, results: [], isLoading: true },
@@ -96,7 +99,7 @@ export const fetchSpecificDetails = createAsyncThunk(
   async (query: {
     id: string;
     infoType: string;
-  }): Promise<AxiosResponse<CreditResponse>> => {
+  }): Promise<AxiosResponse<any>> => {
     const { id, infoType } = query;
     try {
       return await getSpecificDetails(id, infoType);
@@ -181,9 +184,10 @@ export const movieSlice = createSlice({
       .addCase(fetchSpecificDetails.pending, (state) => {
         state.details.isLoading = true;
       })
-      .addCase(fetchSpecificDetails.fulfilled, (state, { payload }) => {
+      .addCase(fetchSpecificDetails.fulfilled, (state, { payload, meta }) => {
+        info = meta.arg.infoType as DetailsObjKey;
         state.details.isLoading = false;
-        state.details.credits = payload.data;
+        state.details[info] = payload.data;
       })
       .addCase(fetchSpecificDetails.rejected, (state) => {
         state.details.isLoading = false;

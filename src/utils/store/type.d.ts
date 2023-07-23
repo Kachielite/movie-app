@@ -92,6 +92,31 @@ export interface CreditResponse {
   crew?: Crew[];
 }
 
+export interface AuthorDetails {
+  name: string;
+  username: string;
+  avatar_path: string;
+  rating: number;
+}
+
+export interface Review {
+  author?: string;
+  author_details: AuthorDetails;
+  content: string;
+  created_at: string;
+  id: number;
+  updated_at?: Date;
+  url?: string;
+}
+
+export interface ReviewResponse {
+  id?: number;
+  page?: number;
+  results?: Review[];
+  total_pages?: number;
+  total_results?: number;
+}
+
 export interface MovieDetails {
   adult?: boolean;
   backdrop_path?: string;
@@ -166,6 +191,7 @@ export interface MovieDetailsObj {
   details: MovieDetails;
   isLoading: boolean;
   credits: CreditResponse;
+  reviews: ReviewResponse;
 }
 
 export interface MovieState {
