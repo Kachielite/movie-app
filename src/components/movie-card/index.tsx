@@ -4,6 +4,7 @@ import MovieCard from "./movieCard";
 import { useAppDispatch } from "../../utils/store/hooks";
 import { discoverMovies } from "../../utils/store/slides/movie";
 import useMovieCard from "./hooks/useMovieCard";
+import { MovieData } from "../../utils/store/type";
 
 const SkeletonLoader: FC = () => {
   return (
@@ -18,14 +19,11 @@ const SkeletonLoader: FC = () => {
   );
 };
 
-const MovieCardComponent: FC = () => {
-  const dispatch = useAppDispatch();
-  const { page, isLoading } = useMovieCard();
-
-  useEffect(() => {
-    dispatch(discoverMovies({ page: page }));
-  }, [dispatch]);
-
+const MovieCardComponent: FC<{
+  isLoading: boolean;
+  movies: MovieData[];
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+}> = ({ isLoading, movies, setPage }) => {
   return (
     <div className="h-full">
       {isLoading ? (
@@ -37,7 +35,7 @@ const MovieCardComponent: FC = () => {
             ))}
         </div>
       ) : (
-        <MovieCard />
+        <MovieCard movies={movies} setPage={setPage} />
       )}
     </div>
   );

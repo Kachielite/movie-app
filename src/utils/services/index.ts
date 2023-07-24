@@ -31,7 +31,9 @@ const API_PATHS = {
   collection: (collection_id: string): string => {
     return `/collection/${collection_id}`;
   },
-  persons: "/person/popular",
+  persons: (page: string): string => {
+    return `/person/popular?page=${page}`;
+  },
   person: (person_id: string): string => {
     return `/person/${person_id}`;
   },
@@ -113,6 +115,14 @@ export const getPersonDetails = async (
 ): Promise<AxiosResponse> => {
   try {
     return await customAxios(`${API_PATHS.person(person_id)}`);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+export const getPersons = async (page: string): Promise<AxiosResponse> => {
+  try {
+    return await customAxios(`${API_PATHS.persons(page)}`);
   } catch (e) {
     return Promise.reject(e);
   }

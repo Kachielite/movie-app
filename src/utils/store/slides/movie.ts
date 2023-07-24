@@ -8,6 +8,8 @@ import {
   MovieState,
   PersonMovieCreditResponse,
   PersonResponse,
+  PopularPersons,
+  PopularPersonsResponse,
 } from "../type";
 import {
   getAllMovieGenres,
@@ -17,6 +19,7 @@ import {
   getMoviesTrend,
   getPersonDetails,
   getPersonMovieCredits,
+  getPersons,
   getSpecificDetails,
   getTrendingMovies,
 } from "../../services";
@@ -38,6 +41,7 @@ const initialState: MovieState = {
   },
   genres: { genre: [], isLoading: true },
   person: { isLoading: true, details: {}, credits: {} },
+  persons: { isLoading: true, persons: { results: [] } },
   trends: {
     now_playing: { page: 1, results: [], isLoading: true },
     popular: { page: 1, results: [], isLoading: true },
@@ -163,6 +167,20 @@ export const fetchPersonMovieCredits = createAsyncThunk(
   },
 );
 
+export const fetchPopularPersons = createAsyncThunk(
+  "person/popular",
+  async (query: {
+    page: string;
+  }): Promise<AxiosResponse<PopularPersonsResponse>> => {
+    const { page } = query;
+    try {
+      return await getPersons(page);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
+);
+
 export const movieSlice = createSlice({
   name: "movie",
   initialState,
@@ -176,7 +194,9 @@ export const movieSlice = createSlice({
     builder
       .addCase(fetchMoviesTrend.pending, (state, { meta }) => {
         arg = meta.arg.trend as ObjectKey;
-        state.trends[arg].isLoading = true;
+        if (state.trends[arg].results.length === 0) {
+          state.trends[arg].isLoading = true;
+        }
       })
       .addCase(fetchMoviesTrend.fulfilled, (state, { payload, meta }) => {
         arg = meta.arg.trend as ObjectKey;
@@ -186,16 +206,19 @@ export const movieSlice = createSlice({
           ...payload.data.results,
         ];
       })
-      .addCase(fetchMoviesTrend.rejected, (state) => {
-        state.trends.discovery.isLoading = false;
+      .addCase(fetchMoviesTrend.rejected, (state, { meta }) => {
+        arg = meta.arg.trend as ObjectKey;
+        state.trends[arg].isLoading = false;
       })
       .addCase(discoverMovies.pending, (state) => {
-        state.trends.discovery.isLoading = true;
+        if (state.trends.discovery.results.length === 0) {
+          state.trends.discovery.isLoading = true;
+        }
       })
       .addCase(discoverMovies.fulfilled, (state, { payload }) => {
         state.trends.discovery.isLoading = false;
         state.trends.discovery.results = [
-          ...payload.data.results,
+          ...state.trends.discovery.results,
           ...payload.data.results,
         ];
       })
@@ -213,7 +236,9 @@ export const movieSlice = createSlice({
         state.genres.isLoading = false;
       })
       .addCase(fetchTrendingMovies.pending, (state) => {
-        state.trends.trending.isLoading = true;
+        if (state.trends.trending.results.length === 0) {
+          state.trends.trending.isLoading = true;
+        }
       })
       .addCase(fetchTrendingMovies.fulfilled, (state, { payload }) => {
         state.trends.trending.isLoading = false;
@@ -275,6 +300,20 @@ export const movieSlice = createSlice({
       })
       .addCase(fetchPersonMovieCredits.rejected, (state) => {
         state.person.isLoading = false;
+      })
+      .addCase(fetchPopularPersons.pending, (state) => {
+        if (state.persons.persons.results.length === 0) {
+          state.persons.isLoading = true;
+        }
+      })
+      .addCase(fetchPopularPersons.fulfilled, (state, { payload }) => {
+        state.persons.isLoading = false;
+        state.persons.persons.results = state.persons.persons.results.concat(
+          payload.data.results,
+        );
+      })
+      .addCase(fetchPopularPersons.rejected, (state) => {
+        state.persons.isLoading = false;
       });
   },
 });

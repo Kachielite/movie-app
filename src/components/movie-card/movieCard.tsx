@@ -3,6 +3,8 @@ import Card from "./card";
 import { MovieData, TVData } from "../../utils/store/type";
 import "react-loading-skeleton/dist/skeleton.css";
 import useMovieCard from "./hooks/useMovieCard";
+import { useBottomScrollListener } from "react-bottom-scroll-listener";
+import { discoverMovies } from "../../utils/store/slides/movie";
 
 const Movie: FC<{ data: MovieData[] }> = ({ data }) => {
   return data?.map(
@@ -46,9 +48,12 @@ const CardToRender: FC<{ selection: string; data: MovieData[] | TVData[] }> = ({
   return <TV data={data as TVData[]} />;
 };
 
-const MovieCard: FC = () => {
-  const { scrollRef, movies } = useMovieCard();
-
+const MovieCard: FC<{
+  movies: MovieData[];
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+}> = ({ movies, setPage }) => {
+  const scrollRef: React.LegacyRef<HTMLDivElement> | undefined =
+    useBottomScrollListener(() => setPage((prevState) => prevState + 1));
   const selection = "movie";
 
   return (

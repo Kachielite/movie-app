@@ -209,6 +209,7 @@ export interface MovieState {
   genres: GenreObj;
   details: MovieDetailsObj;
   person: Person;
+  persons: PopularPersonObj;
 }
 
 export interface MovieQuery {
@@ -241,4 +242,27 @@ export interface Person {
   isLoading: boolean;
   details: PersonResponse;
   credits: PersonMovieCreditResponse;
+}
+
+export interface PopularPersons {
+  adult?: boolean;
+  gender?: number;
+  id?: number;
+  known_for?: [];
+  known_for_department?: string;
+  name?: string;
+  popularity?: number;
+  profile_path?: string;
+}
+
+export interface PopularPersonsResponse {
+  page?: number;
+  results: PopularPersons[];
+  total_pages?: number;
+  total_results?: number;
+}
+
+export interface PopularPersonObj {
+  isLoading: boolean;
+  persons: PopularPersonsResponse;
 }
