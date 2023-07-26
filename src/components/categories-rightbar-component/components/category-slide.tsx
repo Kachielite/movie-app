@@ -28,23 +28,9 @@ const CategorySlide: FC<Props> = ({
           ? Array(3)
               .fill(true)
               .map((_, i) => <CategorySkeleton key={i} />)
-          : movieData?.map(
-              ({
-                title,
-                id,
-                genre_ids,
-                vote_count,
-                backdrop_path,
-              }: MovieData) => (
-                <CategoryCard
-                  key={id}
-                  title={title}
-                  genre_ids={genre_ids}
-                  vote_count={vote_count}
-                  backdrop_path={backdrop_path}
-                />
-              ),
-            )}
+          : movieData?.map((movie: MovieData) => (
+              <CategoryCard movie={movie} />
+            ))}
         {type === "genre" && isLoading
           ? Array(3)
               .fill(true)
