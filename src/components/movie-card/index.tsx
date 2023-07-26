@@ -4,7 +4,7 @@ import MovieCard from "./movieCard";
 import { useAppDispatch } from "../../utils/store/hooks";
 import { discoverMovies } from "../../utils/store/slides/movie";
 import useMovieCard from "./hooks/useMovieCard";
-import { MovieData } from "../../utils/store/type";
+import { MovieData, MovieDetails } from "../../utils/store/type";
 
 const SkeletonLoader: FC = () => {
   return (
@@ -21,12 +21,12 @@ const SkeletonLoader: FC = () => {
 
 const MovieCardComponent: FC<{
   isLoading: boolean;
-  movies: MovieData[];
+  movies: MovieData[] | MovieDetails[];
 }> = ({ isLoading, movies }) => {
   return (
     <div className="h-full">
       {isLoading ? (
-        <div className="flex flex-wrap justify-center md:justify-evenly lg:justify-between items-center w-full">
+        <div className="flex flex-wrap justify-start md:justify-evenly lg:justify-between items-center w-full">
           {Array(21)
             .fill(true)
             .map((_, i) => (

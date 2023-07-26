@@ -210,6 +210,7 @@ export interface MovieState {
   details: MovieDetailsObj;
   person: Person;
   persons: PopularPersonObj;
+  watchlist: (MovieDetails | MovieData)[];
 }
 
 export interface MovieQuery {

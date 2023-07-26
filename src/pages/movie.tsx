@@ -6,6 +6,8 @@ import FilmHouse from "../assets/images/producer-housing.png";
 import { Link, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../utils/store/hooks";
 import {
+  addToWatchlist,
+  deleteFromWatchlist,
   fetchMovieCollection,
   fetchMovieDetails,
   fetchSpecificDetails,
@@ -14,9 +16,10 @@ import { RootState } from "../utils/store";
 import { BASE_IMAGE_URL } from "../utils/services";
 import CreditComponent from "../components/credit-component";
 import { RotatingLines } from "react-loader-spinner";
-import { Crew } from "../utils/store/type";
+import { Crew, MovieData, MovieDetails } from "../utils/store/type";
 import ReviewComponent from "../components/review-component";
 import SimilarMovieComponent from "../components/similar-movie-component";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 
 const Movie: FC = () => {
   const { id } = useParams<string>();
@@ -29,6 +32,7 @@ const Movie: FC = () => {
     similar,
     collection,
   } = useAppSelector((state: RootState) => state.movie.details);
+  const watchlist = useAppSelector((state: RootState) => state.movie.watchlist);
   const { crew, cast } = credits;
   const { results: reviewData } = reviews;
   const { results: similarMoviesData } = similar;
@@ -53,6 +57,16 @@ const Movie: FC = () => {
       dispatch(fetchMovieCollection({ collection_id: collectionId }));
     }
   }, [collectionId, id]);
+
+  const watchlistCheck = (): boolean => {
+    return !!watchlist.find(
+      (movie: MovieData | MovieDetails) => movie.id === movieDetails.id,
+    );
+  };
+
+  useEffect(() => {
+    watchlistCheck();
+  }, [watchlist]);
 
   return (
     <div className="w-full min-h-screen flex justify-center items-center">
@@ -112,12 +126,29 @@ const Movie: FC = () => {
                     {movieDetails?.overview}
                   </p>
                   <div className="flex flex-col md:flex-row  items-start md:items-center space-y-7 md:space-y-0 md:space-x-[2.85rem] justify-start w-full">
-                    <Btn type="cta2">
-                      <div className="flex flex-row items-center space-x-[0.9rem] justify-center ">
-                        <Plus />
-                        <p>Watchlist</p>
-                      </div>
-                    </Btn>
+                    {watchlistCheck() ? (
+                      <Btn
+                        type="cta2"
+                        onClick={() =>
+                          dispatch(deleteFromWatchlist(movieDetails))
+                        }
+                      >
+                        <div className="flex flex-row items-center space-x-[0.9rem] justify-center ">
+                          <MdOutlineDeleteOutline color="white" size="2rem" />
+                          <p>Remove from Watchlist</p>
+                        </div>
+                      </Btn>
+                    ) : (
+                      <Btn
+                        type="cta2"
+                        onClick={() => dispatch(addToWatchlist(movieDetails))}
+                      >
+                        <div className="flex flex-row items-center space-x-[0.9rem] justify-center ">
+                          <Plus />
+                          <p>Watchlist</p>
+                        </div>
+                      </Btn>
+                    )}
                     <Btn type="cta">
                       <p className="lg:px-[0.65rem]">Watch now</p>
                     </Btn>

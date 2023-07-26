@@ -6,6 +6,7 @@ import Movie from "../pages/movie";
 import GenrePage from "../pages/genre";
 import Person from "../pages/person";
 import Persons from "../pages/persons";
+import Watchlist from "../pages/watchlist";
 
 const LocalRoute: FC = () => {
   return (
@@ -17,6 +18,7 @@ const LocalRoute: FC = () => {
       <Route path="/genre/" element={<GenrePage />} />
       <Route path="/genre/:type" element={<Category />} />
       <Route path="/person/:id" element={<Person />} />
+      <Route path="/watchlist" element={<Watchlist />} />
     </Routes>
   );
 };

@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   CollectionResponse,
   GenreResponse,
+  MovieData,
   MovieDetails,
   MovieQuery,
   MovieResponse,
@@ -50,6 +51,7 @@ const initialState: MovieState = {
     discovery: { page: 1, results: [], isLoading: true },
     trending: { page: 1, results: [], isLoading: true },
   },
+  watchlist: [],
 };
 
 export const fetchMoviesTrend = createAsyncThunk(
@@ -189,6 +191,20 @@ export const movieSlice = createSlice({
       console.log("I got hit" + "");
       const { payload } = action;
       state.trends[payload].page = state.trends[payload].page += 1;
+    },
+    addToWatchlist: (
+      state,
+      action: PayloadAction<MovieData | MovieDetails>,
+    ) => {
+      state.watchlist = state.watchlist.concat(action.payload);
+    },
+    deleteFromWatchlist: (
+      state,
+      action: PayloadAction<MovieData | MovieDetails>,
+    ) => {
+      state.watchlist = state.watchlist.filter(
+        (movie: MovieData | MovieDetails) => movie.id !== action.payload.id,
+      );
     },
   },
   extraReducers: function (builder) {
@@ -344,6 +360,7 @@ export const movieSlice = createSlice({
   },
 });
 
-export const { setPage } = movieSlice.actions;
+export const { setPage, addToWatchlist, deleteFromWatchlist } =
+  movieSlice.actions;
 
 export default movieSlice.reducer;

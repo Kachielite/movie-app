@@ -15,6 +15,8 @@ const MenuComponent: FC<Props> = ({ menu, title }) => {
       return "/";
     } else if (name == "genre") {
       return "/genre";
+    } else if (name == "watchlist") {
+      return "/watchlist";
     } else {
       return `/category/${name.toLowerCase()}`;
     }
@@ -36,6 +38,9 @@ const MenuComponent: FC<Props> = ({ menu, title }) => {
                   "border-r-4 border-r-primary") ||
                 (pathname.includes("genre") &&
                   name === "Genre" &&
+                  "border-r-4 border-r-primary") ||
+                (pathname.includes("watchlist") &&
+                  name === "Watchlist" &&
                   "border-r-4 border-r-primary")
               }`}
               key={index}
@@ -44,7 +49,8 @@ const MenuComponent: FC<Props> = ({ menu, title }) => {
                 stroke:
                   pathname === `/category/${link.toLowerCase()}` ||
                   (pathname === "/" && name === "Home") ||
-                  (pathname.includes("genre") && name === "Genre")
+                  (pathname.includes("genre") && name === "Genre") ||
+                  (pathname.includes("watchlist") && name === "Watchlist")
                     ? "#F8B319"
                     : "#F9F9F9",
               })}
@@ -52,7 +58,8 @@ const MenuComponent: FC<Props> = ({ menu, title }) => {
                 className={`text-[1.125rem] font-semibold group-hover:text-primary  ${
                   pathname === `/category/${link.toLowerCase()}` ||
                   (pathname === "/" && name === "Home") ||
-                  (pathname.includes("genre") && name === "Genre")
+                  (pathname.includes("genre") && name === "Genre") ||
+                  (pathname.includes("watchlist") && name === "Watchlist")
                     ? "text-primary"
                     : "text-primaryText"
                 }`}
