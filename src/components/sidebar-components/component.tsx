@@ -29,7 +29,7 @@ const MenuComponent: FC<Props> = ({ menu, title }) => {
             <Link
               to={menuHighlighter(link)}
               className={`group flex flex-row space-x-[0.94rem] w-full cursor-pointer hover:border-r-4 hover:border-r-primary ${
-                (name.toLowerCase() === type &&
+                (pathname === `/category/${link.toLowerCase()}` &&
                   "border-r-4 border-r-primary") ||
                 (pathname === "/" &&
                   name === "Home" &&
@@ -42,7 +42,7 @@ const MenuComponent: FC<Props> = ({ menu, title }) => {
             >
               {cloneElement(icon, {
                 stroke:
-                  name.toLowerCase() === type ||
+                  pathname === `/category/${link.toLowerCase()}` ||
                   (pathname === "/" && name === "Home") ||
                   (pathname.includes("genre") && name === "Genre")
                     ? "#F8B319"
@@ -50,7 +50,7 @@ const MenuComponent: FC<Props> = ({ menu, title }) => {
               })}
               <p
                 className={`text-[1.125rem] font-semibold group-hover:text-primary  ${
-                  name.toLowerCase() === type ||
+                  pathname === `/category/${link.toLowerCase()}` ||
                   (pathname === "/" && name === "Home") ||
                   (pathname.includes("genre") && name === "Genre")
                     ? "text-primary"

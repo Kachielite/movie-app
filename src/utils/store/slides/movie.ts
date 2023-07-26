@@ -193,10 +193,18 @@ export const movieSlice = createSlice({
   extraReducers: function (builder) {
     builder
       .addCase(fetchMoviesTrend.pending, (state, { meta }) => {
+        const trendsArray: ObjectKey[] = [];
         arg = meta.arg.trend as ObjectKey;
+        trendsArray.map((i): void => {
+          if (i != arg) {
+            state.trends[i].results = [];
+          }
+        });
         if (state.trends[arg].results.length === 0) {
           state.trends[arg].isLoading = true;
         }
+        // arg = meta.arg.trend as ObjectKey;
+        // state.trends[arg].isLoading = true;
       })
       .addCase(fetchMoviesTrend.fulfilled, (state, { payload, meta }) => {
         arg = meta.arg.trend as ObjectKey;

@@ -16,11 +16,19 @@ const Category: FC = () => {
   const { trends } = useAppSelector((state: RootState) => state.movie);
 
   useEffect(() => {
+    setPage(1);
     if (type === "discovery") {
       dispatch(discoverMovies({ page: page }));
     }
     dispatch(fetchMoviesTrend({ trend: type, page: page }));
-  }, [type, page, dispatch]);
+  }, [type]);
+
+  useEffect(() => {
+    if (type === "discovery") {
+      dispatch(discoverMovies({ page: page }));
+    }
+    dispatch(fetchMoviesTrend({ trend: type, page: page }));
+  }, [page]);
 
   return (
     <Layout>

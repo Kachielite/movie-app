@@ -28,7 +28,7 @@ const MovieCardComponent: FC<{
     <div className="h-full">
       {isLoading ? (
         <div className="flex flex-wrap justify-center md:justify-evenly lg:justify-between items-center w-full">
-          {Array(6)
+          {Array(21)
             .fill(true)
             .map((_, i) => (
               <SkeletonLoader key={i} />
