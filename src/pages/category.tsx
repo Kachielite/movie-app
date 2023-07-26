@@ -5,7 +5,11 @@ import DropdownComponent from "../components/dropdown";
 import { Funnel } from "../components/Icon-components";
 import MovieCardComponent from "../components/movie-card";
 import { useAppDispatch, useAppSelector } from "../utils/store/hooks";
-import { discoverMovies, fetchMoviesTrend } from "../utils/store/slides/movie";
+import {
+  discoverMovies,
+  fetchMoviesTrend,
+  fetchTrendingMovies,
+} from "../utils/store/slides/movie";
 import { RootState } from "../utils/store";
 
 const Category: FC = () => {
@@ -15,13 +19,14 @@ const Category: FC = () => {
   const { trends } = useAppSelector((state: RootState) => state.movie);
   const trendType = type as TrendsKey;
 
-  console.log(trends);
-
   useEffect(() => {
     if (type === "discovery") {
       dispatch(discoverMovies({ page: trends[type].page }));
     }
-    if (type) {
+    if (type === "trending") {
+      dispatch(fetchTrendingMovies());
+    }
+    if (type !== "discovery" && type !== "trending") {
       dispatch(fetchMoviesTrend({ trend: type, page: trends[trendType].page }));
     }
   }, [type, trends[trendType].page]);

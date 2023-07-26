@@ -227,6 +227,13 @@ export const movieSlice = createSlice({
         }
       })
       .addCase(discoverMovies.fulfilled, (state, { payload }) => {
+        const trendsArray: ObjectKey[] = [];
+        trendsArray.map((i): void => {
+          if (i != "discovery") {
+            state.trends[i].page = 1;
+            state.trends[i].results = [];
+          }
+        });
         state.trends.discovery.isLoading = false;
         state.trends.discovery.results = [
           ...state.trends.discovery.results,
@@ -247,6 +254,14 @@ export const movieSlice = createSlice({
         state.genres.isLoading = false;
       })
       .addCase(fetchTrendingMovies.pending, (state) => {
+        state.trends.trending.results = [];
+        const trendsArray: ObjectKey[] = [];
+        trendsArray.map((i): void => {
+          if (i != "trending") {
+            state.trends[i].page = 1;
+            state.trends[i].results = [];
+          }
+        });
         if (state.trends.trending.results.length === 0) {
           state.trends.trending.isLoading = true;
         }
