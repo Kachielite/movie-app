@@ -4,7 +4,10 @@ import { MovieData, TVData } from "../../utils/store/type";
 import "react-loading-skeleton/dist/skeleton.css";
 import useMovieCard from "./hooks/useMovieCard";
 import { useBottomScrollListener } from "react-bottom-scroll-listener";
-import { discoverMovies } from "../../utils/store/slides/movie";
+import { discoverMovies, setPage } from "../../utils/store/slides/movie";
+import { useAppDispatch, useAppSelector } from "../../utils/store/hooks";
+import { useParams } from "react-router-dom";
+import { RootState } from "../../utils/store";
 
 const Movie: FC<{ data: MovieData[] }> = ({ data }) => {
   return data?.map(
@@ -50,10 +53,14 @@ const CardToRender: FC<{ selection: string; data: MovieData[] | TVData[] }> = ({
 
 const MovieCard: FC<{
   movies: MovieData[];
-  setPage: React.Dispatch<React.SetStateAction<number>>;
-}> = ({ movies, setPage }) => {
+}> = ({ movies }) => {
+  const { type } = useParams();
+  const dispatch = useAppDispatch();
+  const { trends } = useAppSelector((state: RootState) => state.movie);
+  type TrendsKey = keyof typeof trends;
+  const typeTrend = type as TrendsKey;
   const scrollRef: React.LegacyRef<HTMLDivElement> | undefined =
-    useBottomScrollListener(() => setPage((prevState) => prevState + 1));
+    useBottomScrollListener(() => dispatch(setPage(typeTrend)));
   const selection = "movie";
 
   return (

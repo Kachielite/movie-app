@@ -186,29 +186,31 @@ export const movieSlice = createSlice({
   initialState,
   reducers: {
     setPage: (state, action: PayloadAction<ObjectKey>) => {
+      console.log("I got hit" + "");
       const { payload } = action;
-      state.trends[payload].page = state.trends[payload].page++;
+      state.trends[payload].page = state.trends[payload].page += 1;
     },
   },
   extraReducers: function (builder) {
     builder
       .addCase(fetchMoviesTrend.pending, (state, { meta }) => {
-        const trendsArray: ObjectKey[] = [];
         arg = meta.arg.trend as ObjectKey;
-        trendsArray.map((i): void => {
-          if (i != arg) {
-            state.trends[i].results = [];
-          }
-        });
         if (state.trends[arg].results.length === 0) {
           state.trends[arg].isLoading = true;
         }
-        // arg = meta.arg.trend as ObjectKey;
-        // state.trends[arg].isLoading = true;
       })
       .addCase(fetchMoviesTrend.fulfilled, (state, { payload, meta }) => {
         arg = meta.arg.trend as ObjectKey;
+        const trendsArray: ObjectKey[] = [];
         state.trends[arg].isLoading = false;
+        trendsArray.map((i): void => {
+          console.log(i);
+          if (i != arg) {
+            state.trends[i].page = 1;
+            state.trends[i].results = [];
+          }
+        });
+        state.trends[arg].page = payload.data.page;
         state.trends[arg].results = [
           ...state.trends[arg].results,
           ...payload.data.results,
@@ -219,6 +221,7 @@ export const movieSlice = createSlice({
         state.trends[arg].isLoading = false;
       })
       .addCase(discoverMovies.pending, (state) => {
+        state.trends.discovery.results = [];
         if (state.trends.discovery.results.length === 0) {
           state.trends.discovery.isLoading = true;
         }
@@ -282,7 +285,7 @@ export const movieSlice = createSlice({
       .addCase(fetchMovieCollection.pending, (state) => {
         state.details.isLoading = true;
       })
-      .addCase(fetchMovieCollection.fulfilled, (state, { payload, meta }) => {
+      .addCase(fetchMovieCollection.fulfilled, (state, { payload }) => {
         state.details.isLoading = false;
         state.details.collection = payload.data;
       })

@@ -22,8 +22,7 @@ const SkeletonLoader: FC = () => {
 const MovieCardComponent: FC<{
   isLoading: boolean;
   movies: MovieData[];
-  setPage: React.Dispatch<React.SetStateAction<number>>;
-}> = ({ isLoading, movies, setPage }) => {
+}> = ({ isLoading, movies }) => {
   return (
     <div className="h-full">
       {isLoading ? (
@@ -35,7 +34,7 @@ const MovieCardComponent: FC<{
             ))}
         </div>
       ) : (
-        <MovieCard movies={movies} setPage={setPage} />
+        <MovieCard movies={movies} />
       )}
     </div>
   );

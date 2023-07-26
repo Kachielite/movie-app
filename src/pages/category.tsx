@@ -12,23 +12,19 @@ const Category: FC = () => {
   type TrendsKey = keyof typeof trends;
   const { type } = useParams();
   const dispatch = useAppDispatch();
-  const [page, setPage] = useState<number>(1);
   const { trends } = useAppSelector((state: RootState) => state.movie);
+  const trendType = type as TrendsKey;
 
-  useEffect(() => {
-    setPage(1);
-    if (type === "discovery") {
-      dispatch(discoverMovies({ page: page }));
-    }
-    dispatch(fetchMoviesTrend({ trend: type, page: page }));
-  }, [type]);
+  console.log(trends);
 
   useEffect(() => {
     if (type === "discovery") {
-      dispatch(discoverMovies({ page: page }));
+      dispatch(discoverMovies({ page: trends[type].page }));
     }
-    dispatch(fetchMoviesTrend({ trend: type, page: page }));
-  }, [page]);
+    if (type) {
+      dispatch(fetchMoviesTrend({ trend: type, page: trends[trendType].page }));
+    }
+  }, [type, trends[trendType].page]);
 
   return (
     <Layout>
@@ -44,7 +40,6 @@ const Category: FC = () => {
       <MovieCardComponent
         isLoading={trends[type as TrendsKey]?.isLoading as boolean}
         movies={trends[type as TrendsKey]?.results}
-        setPage={setPage}
       />
     </Layout>
   );
