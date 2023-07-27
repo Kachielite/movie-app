@@ -26,7 +26,7 @@ const Card: FC<Props> = ({
     <Link
       to={`/movie/${id}`}
       className={`flex flex-col justify-start items-start flex-shrink-0 font-lato ${
-        pathname.includes("movie") ? "w-[18.44rem]" : "w-full md:w-[18.44rem]"
+        pathname.includes("movie") ? "w-[15.44rem]" : "w-full md:w-[15.44rem]"
       }  pb-10 px-2`}
     >
       <div className="relative w-full h-[26.06rem] rounded-t-[1.06rem] overflow-hidden">

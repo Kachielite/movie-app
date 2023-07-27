@@ -1,6 +1,8 @@
 import { cloneElement, FC } from "react";
 import { MenuItem } from "./menu-types-d";
 import { Link, useLocation, useParams } from "react-router-dom";
+import { cleanupCategories } from "../../utils/store/slides/movie";
+import { useAppDispatch } from "../../utils/store/hooks";
 
 interface Props {
   menu: MenuItem[];
@@ -8,7 +10,7 @@ interface Props {
 }
 
 const MenuComponent: FC<Props> = ({ menu, title }) => {
-  const { type } = useParams();
+  const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   const menuHighlighter = (name: string): string => {
     if (name === "Home") {
@@ -29,6 +31,7 @@ const MenuComponent: FC<Props> = ({ menu, title }) => {
         {menu.map(({ icon, name, link }: MenuItem, index) => {
           return (
             <Link
+              onClick={() => dispatch(cleanupCategories(link))}
               to={menuHighlighter(link)}
               className={`group flex flex-row space-x-[0.94rem] w-full cursor-pointer hover:border-r-4 hover:border-r-primary ${
                 (pathname === `/category/${link.toLowerCase()}` &&

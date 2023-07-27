@@ -1,12 +1,17 @@
 import { FC } from "react";
 import { Genre } from "../../../utils/store/type";
 import { Link } from "react-router-dom";
+import { useAppDispatch } from "../../../utils/store/hooks";
+import { cleanupGenre } from "../../../utils/store/slides/movie";
 
 const GenreCard: FC<Genre> = ({ id, name }) => {
+  const dispatch = useAppDispatch();
+
   return (
     <Link
-      to={`/genre/${name.toLowerCase()}`}
+      to={`/genre/${id}`}
       className="relative h-[8.06rem] w-full md:w-[13.13rem] flex-shrink-0 overflow-hidden rounded-[0.5rem] flex-shrink-0  flex justify-center items-center"
+      onClick={() => dispatch(cleanupGenre())}
     >
       <img
         src={`https://source.unsplash.com/random/?${name}`}

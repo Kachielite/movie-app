@@ -185,6 +185,7 @@ export interface TrendsObj {
 export interface GenreObj {
   genre: Genre[];
   isLoading: boolean;
+  movieBasedGenre: MovieStateData;
 }
 
 export interface CollectionResponse {

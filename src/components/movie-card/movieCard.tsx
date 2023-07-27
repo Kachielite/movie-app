@@ -4,9 +4,13 @@ import { MovieData, MovieDetails, TVData } from "../../utils/store/type";
 import "react-loading-skeleton/dist/skeleton.css";
 import useMovieCard from "./hooks/useMovieCard";
 import { useBottomScrollListener } from "react-bottom-scroll-listener";
-import { discoverMovies, setPage } from "../../utils/store/slides/movie";
+import {
+  discoverMovies,
+  setPage,
+  setPageGenre,
+} from "../../utils/store/slides/movie";
 import { useAppDispatch, useAppSelector } from "../../utils/store/hooks";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { RootState } from "../../utils/store";
 
 const Movie: FC<{ data: MovieData[] | MovieDetails[] }> = ({ data }) => {
@@ -55,12 +59,22 @@ const MovieCard: FC<{
   movies: MovieData[] | MovieDetails[];
 }> = ({ movies }) => {
   const { type } = useParams();
+  const { pathname } = useLocation();
   const dispatch = useAppDispatch();
   const { trends } = useAppSelector((state: RootState) => state.movie);
   type TrendsKey = keyof typeof trends;
   const typeTrend = type as TrendsKey;
+
+  const scrollHandler = () => {
+    if (pathname.includes("genre")) {
+      return dispatch(setPageGenre());
+    } else {
+      return dispatch(setPage(typeTrend));
+    }
+  };
+
   const scrollRef: React.LegacyRef<HTMLDivElement> | undefined =
-    useBottomScrollListener(() => dispatch(setPage(typeTrend)));
+    useBottomScrollListener(() => scrollHandler());
   const selection = "movie";
 
   return (
@@ -68,7 +82,7 @@ const MovieCard: FC<{
       className="flex flex-wrap mt-[1.12rem] justify-start  items-center w-full h-full px-4 overflow-y-scroll scrollbar-thin scrollbar-thumb-primary"
       ref={scrollRef}
     >
-      <div className="flex flex-wrap justify-center md:justify-evenly lg:justify-between items-start h-full">
+      <div className="flex flex-wrap justify-center md:justify-evenly items-start h-full">
         <CardToRender data={movies} selection={selection} />
       </div>
     </div>

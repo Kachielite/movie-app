@@ -17,6 +17,7 @@ import {
   getDiscoveryMoviesList,
   getMovieCollection,
   getMovieDetails,
+  getMoviesBasedOnGenre,
   getMoviesTrend,
   getPersonDetails,
   getPersonMovieCredits,
@@ -40,7 +41,11 @@ const initialState: MovieState = {
     similar: { page: 1, results: [] },
     collection: {},
   },
-  genres: { genre: [], isLoading: true },
+  genres: {
+    genre: [],
+    isLoading: true,
+    movieBasedGenre: { page: 1, results: [] },
+  },
   person: { isLoading: true, details: {}, credits: {} },
   persons: { isLoading: true, persons: { results: [] } },
   trends: {
@@ -183,14 +188,32 @@ export const fetchPopularPersons = createAsyncThunk(
   },
 );
 
+export const fetchMoviesBasedOnGenre = createAsyncThunk(
+  "genre/movies_with_genre",
+  async (query: {
+    page: string;
+    genre: string;
+  }): Promise<AxiosResponse<MovieResponse>> => {
+    const { page, genre } = query;
+    try {
+      return await getMoviesBasedOnGenre(page, genre);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
+);
+
 export const movieSlice = createSlice({
   name: "movie",
   initialState,
   reducers: {
     setPage: (state, action: PayloadAction<ObjectKey>) => {
-      console.log("I got hit" + "");
       const { payload } = action;
       state.trends[payload].page = state.trends[payload].page += 1;
+    },
+    setPageGenre: (state) => {
+      state.genres.movieBasedGenre.page =
+        state.genres.movieBasedGenre.page += 1;
     },
     addToWatchlist: (
       state,
@@ -205,6 +228,15 @@ export const movieSlice = createSlice({
       state.watchlist = state.watchlist.filter(
         (movie: MovieData | MovieDetails) => movie.id !== action.payload.id,
       );
+    },
+    cleanupGenre: (state) => {
+      state.genres.movieBasedGenre.results = [];
+      state.genres.movieBasedGenre.page = 1;
+    },
+    cleanupCategories: (state, action) => {
+      const trendToBeCleaned = action.payload as ObjectKey;
+      state.trends[trendToBeCleaned].results = [];
+      state.trends[trendToBeCleaned].page = 1;
     },
   },
   extraReducers: function (builder) {
@@ -356,11 +388,31 @@ export const movieSlice = createSlice({
       })
       .addCase(fetchPopularPersons.rejected, (state) => {
         state.persons.isLoading = false;
+      })
+      .addCase(fetchMoviesBasedOnGenre.pending, (state) => {
+        state.genres.movieBasedGenre.isLoading = true;
+      })
+      .addCase(
+        fetchMoviesBasedOnGenre.fulfilled,
+        (state, { payload, meta }) => {
+          state.genres.movieBasedGenre.isLoading = false;
+          state.genres.movieBasedGenre.results =
+            state.genres.movieBasedGenre.results.concat(payload.data.results);
+        },
+      )
+      .addCase(fetchMoviesBasedOnGenre.rejected, (state) => {
+        state.genres.movieBasedGenre.isLoading = false;
       });
   },
 });
 
-export const { setPage, addToWatchlist, deleteFromWatchlist } =
-  movieSlice.actions;
+export const {
+  setPage,
+  addToWatchlist,
+  deleteFromWatchlist,
+  setPageGenre,
+  cleanupGenre,
+  cleanupCategories,
+} = movieSlice.actions;
 
 export default movieSlice.reducer;

@@ -10,6 +10,9 @@ const API_PATHS = {
   getDiscoverList: (type: Movie | TV, page: number): string => {
     return `/discover/${type}?page=${page}`;
   },
+  getDiscoveryWithGenre: (page: string, genre: string): string => {
+    return `/discover/movie?page=${page}&with_genres=${genre}`;
+  },
   findResource: (id: number): string => {
     return `/find/${id}`;
   },
@@ -133,6 +136,17 @@ export const getPersonMovieCredits = async (
 ): Promise<AxiosResponse> => {
   try {
     return await customAxios(`${API_PATHS.personMovieCredits(person_id)}`);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+export const getMoviesBasedOnGenre = async (
+  page: string,
+  genre: string,
+): Promise<AxiosResponse> => {
+  try {
+    return await customAxios(`${API_PATHS.getDiscoveryWithGenre(page, genre)}`);
   } catch (e) {
     return Promise.reject(e);
   }
