@@ -41,7 +41,7 @@ const useSlider = () => {
     setCaption(moviesData[slideIndex]?.title);
   }, [slideIndex]);
 
-  return { slideIndex, slideHandler, slide, caption, isLoading };
+  return { slideIndex, slideHandler, slide, caption, isLoading, moviesData };
 };
 
 export default useSlider;

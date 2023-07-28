@@ -28,31 +28,12 @@ const CardContainer: FC = () => {
       <div className="absolute right-2.5 z-40 group-hover:scale-150 ease-in duration-300 hidden lg:flex justify-center items-center rounded-[0.25rem] space-x-[0.01rem] h-8 w-8 bg-black/[.3] p-3">
         <NextBtn />
       </div>
-      <div className="flex flex-row justify-start items-center space-x-[1.88rem] py-4 w-full scroll-smooth scrollbar-corner-neutral-50 overflow-x-auto scrolling-touch  scroll-smooth scrollbar-none">
+      <div className="flex flex-row justify-start items-center space-x-[1.88rem] py-4 w-full scroll-smooth scrollbar-corner-neutral-50 overflow-x-auto scrolling-touch  scroll-smooth scrollbar-thin scrollbar-thumb-primary">
         {isLoading
           ? Array(10)
               .fill(true)
               .map((_, i) => <SkeletonLoader key={i} />)
-          : results.map(
-              ({
-                id,
-                title,
-                vote_count,
-                vote_average,
-                backdrop_path,
-                genre_ids,
-              }: MovieData) => (
-                <Card
-                  key={id}
-                  title={title}
-                  vote_average={vote_average}
-                  vote_count={vote_count}
-                  poster_path={backdrop_path}
-                  genre_ids={genre_ids}
-                  id={id}
-                />
-              ),
-            )}
+          : results.map((movie: MovieData) => <Card movie={movie} />)}
       </div>
     </div>
   );

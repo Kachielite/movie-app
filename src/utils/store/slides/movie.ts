@@ -26,6 +26,7 @@ import {
   getTrendingMovies,
 } from "../../services";
 import { AxiosResponse } from "axios";
+import toast from "react-hot-toast";
 
 type ObjectKey = keyof typeof initialState.trends;
 let arg: ObjectKey;
@@ -220,6 +221,7 @@ export const movieSlice = createSlice({
       action: PayloadAction<MovieData | MovieDetails>,
     ) => {
       state.watchlist = state.watchlist.concat(action.payload);
+      toast.success("Movie added to watchlist");
     },
     deleteFromWatchlist: (
       state,
@@ -228,6 +230,7 @@ export const movieSlice = createSlice({
       state.watchlist = state.watchlist.filter(
         (movie: MovieData | MovieDetails) => movie.id !== action.payload.id,
       );
+      toast.success("Movie removed from watchlist");
     },
     cleanupGenre: (state) => {
       state.genres.movieBasedGenre.results = [];

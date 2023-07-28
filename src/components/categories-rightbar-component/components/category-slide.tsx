@@ -23,7 +23,7 @@ const CategorySlide: FC<Props> = ({
   return (
     <div className="flex flex-col justify-start space-y-[1.87rem] items-start w-full">
       <Controls title={categoryTitle} />
-      <div className="w-full overflow-x-auto scrollbar flex flex-row space-x-[1.65rem]">
+      <div className="w-full overflow-x-auto scrolling-touch  scroll-smooth scrollbar-thin scrollbar-thumb-primary flex flex-row space-x-[1.65rem]">
         {type === "movies" && isLoading
           ? Array(3)
               .fill(true)
