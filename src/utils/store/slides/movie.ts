@@ -60,7 +60,7 @@ const initialState: MovieState = {
     trending: { page: 1, results: [], isLoading: true },
   },
   videoModal: { isOpen: false, youtubeKey: "" },
-  watchlist: [],
+  watchlist: JSON.parse(localStorage.getItem("watchlist") as string) || [],
   loadMore: false,
 };
 
@@ -239,6 +239,7 @@ export const movieSlice = createSlice({
       action: PayloadAction<MovieData | MovieDetails>,
     ) => {
       state.watchlist = state.watchlist.concat(action.payload);
+      localStorage.setItem("watchlist", JSON.stringify(state.watchlist));
       toast.success("Movie added to watchlist");
     },
     deleteFromWatchlist: (
@@ -248,6 +249,7 @@ export const movieSlice = createSlice({
       state.watchlist = state.watchlist.filter(
         (movie: MovieData | MovieDetails) => movie.id !== action.payload.id,
       );
+      localStorage.setItem("watchlist", JSON.stringify(state.watchlist));
       toast.success("Movie removed from watchlist");
     },
     cleanupGenre: (state) => {

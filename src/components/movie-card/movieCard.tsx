@@ -66,6 +66,9 @@ const MovieCard: FC<{
   const typeTrend = type as TrendsKey;
 
   const scrollHandler = () => {
+    if (pathname.includes("watchlist")) {
+      return null;
+    }
     if (pathname.includes("genre")) {
       return dispatch(setPageGenre());
     } else {
