@@ -6,6 +6,7 @@ const useSlider = () => {
   const { results: moviesData, isLoading } = useAppSelector(
     (state: RootState) => state.movie.trends.now_playing,
   );
+
   const [slideIndex, setSlideIndex] = useState<number>(0);
   const [slide, setSlide] = useState<string | undefined>(
     moviesData[slideIndex]?.backdrop_path,

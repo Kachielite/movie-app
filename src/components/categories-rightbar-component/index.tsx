@@ -10,7 +10,9 @@ import { RootState } from "../../utils/store";
 
 const CategoriesRightBarComponent: FC = () => {
   const dispatch = useAppDispatch();
-  const { genres, trends } = useAppSelector((state: RootState) => state.movie);
+  const { genres, trends, loadMore } = useAppSelector(
+    (state: RootState) => state.movie,
+  );
 
   const { genre, isLoading: genreLoading } = genres;
   const { results: upcomingData, isLoading: upcomingLoading } = trends.upcoming;
