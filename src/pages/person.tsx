@@ -33,7 +33,7 @@ const Person: FC = () => {
       {isLoading ? (
         <RotatingLines
           strokeColor="#F8B319"
-          strokeWidth="5"
+          strokeWidth="2"
           animationDuration="0.75"
           width="200"
           visible={true}

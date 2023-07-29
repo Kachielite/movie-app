@@ -25,6 +25,7 @@ import {
   getPersons,
   getSpecificDetails,
   getTrendingMovies,
+  searchResource,
 } from "../../services";
 import { AxiosResponse } from "axios";
 import toast from "react-hot-toast";
@@ -59,6 +60,8 @@ const initialState: MovieState = {
     discovery: { page: 1, results: [], isLoading: true },
     trending: { page: 1, results: [], isLoading: true },
   },
+  searchedMovie: { page: 1, results: [], isLoading: true },
+  searchedPerson: { isLoading: true, persons: { results: [] } },
   videoModal: { isOpen: false, youtubeKey: "" },
   watchlist: JSON.parse(localStorage.getItem("watchlist") as string) || [],
   loadMore: false,
@@ -216,6 +219,36 @@ export const fetchMovieTrailer = createAsyncThunk(
     const { id } = query;
     try {
       return await getMoviesTrailer(id);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
+);
+
+export const searchPerson = createAsyncThunk(
+  "search/person",
+  async (query: {
+    searchedPhrase: string;
+    type: string;
+  }): Promise<AxiosResponse<PopularPersonsResponse>> => {
+    const { searchedPhrase, type } = query;
+    try {
+      return await searchResource(searchedPhrase, "person");
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
+);
+
+export const searchMovie = createAsyncThunk(
+  "search/movie",
+  async (query: {
+    searchedPhrase: string;
+    type: string;
+  }): Promise<AxiosResponse<MovieResponse>> => {
+    const { searchedPhrase, type } = query;
+    try {
+      return await searchResource(searchedPhrase, "movie");
     } catch (error) {
       return Promise.reject(error);
     }
@@ -435,6 +468,35 @@ export const movieSlice = createSlice({
       })
       .addCase(fetchMovieTrailer.rejected, (state) => {
         state.details.isLoading = false;
+      })
+      .addCase(searchPerson.pending, (state) => {
+        if (state.searchedPerson.persons.results.length === 0) {
+          state.searchedPerson.isLoading = true;
+        }
+      })
+      .addCase(searchPerson.fulfilled, (state, { payload }) => {
+        state.searchedPerson.isLoading = false;
+        state.searchedPerson.persons.results =
+          state.persons.persons.results.concat(payload.data.results);
+      })
+      .addCase(searchPerson.rejected, (state) => {
+        state.persons.isLoading = false;
+      })
+      .addCase(searchMovie.pending, (state) => {
+        state.loadMore = true;
+        state.searchedMovie.isLoading = true;
+      })
+      .addCase(searchMovie.fulfilled, (state, { payload }) => {
+        state.loadMore = false;
+        state.searchedMovie.isLoading = false;
+        state.searchedMovie.results = [
+          ...state.searchedMovie.results,
+          ...payload.data.results,
+        ];
+      })
+      .addCase(searchMovie.rejected, (state) => {
+        state.loadMore = false;
+        state.searchedMovie.isLoading = false;
       });
   },
 });

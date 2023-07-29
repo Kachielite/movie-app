@@ -22,10 +22,12 @@ const Card: FC<Props> = ({
 }) => {
   const { pathname } = useLocation();
 
+  const link = () => (pathname.includes("movie") ? "_self" : "_blank");
+
   return (
     <Link
       to={`/movie/${id}`}
-      target="_blank"
+      target={link()}
       rel="noopener noreferrer"
       className={`flex flex-col justify-start items-start flex-shrink-0 font-lato ${
         pathname.includes("movie") ? "w-[15.44rem]" : "w-full md:w-[15.44rem]"

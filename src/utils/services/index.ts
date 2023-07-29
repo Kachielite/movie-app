@@ -13,9 +13,6 @@ const API_PATHS = {
   getDiscoveryWithGenre: (page: string, genre: string): string => {
     return `/discover/movie?page=${page}&with_genres=${genre}`;
   },
-  findResource: (id: number): string => {
-    return `/find/${id}`;
-  },
   getGenres: (type: Movie | TV): string => {
     return `/genre/${type}/list`;
   },
@@ -45,6 +42,9 @@ const API_PATHS = {
   },
   trailer: (movie_id: string): string => {
     return `/movie/${movie_id}/videos`;
+  },
+  search: (query: string, type: string): string => {
+    return `/search/${type}?query=${query}`;
   },
 };
 
@@ -158,6 +158,17 @@ export const getMoviesBasedOnGenre = async (
 export const getMoviesTrailer = async (id: string): Promise<AxiosResponse> => {
   try {
     return await customAxios(`${API_PATHS.trailer(id)}`);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+export const searchResource = async (
+  query: string,
+  type: string,
+): Promise<AxiosResponse> => {
+  try {
+    return await customAxios(`${API_PATHS.search(query, type)}`);
   } catch (e) {
     return Promise.reject(e);
   }

@@ -215,6 +215,8 @@ export interface MovieState {
   videoModal: { isOpen: boolean; youtubeKey: string };
   watchlist: (MovieDetails | MovieData)[];
   loadMore: boolean;
+  searchedPerson: PopularPersonObj;
+  searchedMovie: MovieStateData;
 }
 
 export interface MovieQuery {
