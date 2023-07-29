@@ -97,24 +97,13 @@ const Movie: FC = () => {
             <VideoModal />
           </div>
           <div
-            className={`w-full ${
-              movieDetails?.overview && movieDetails?.overview?.length < 230
-                ? "h-[87rem]"
-                : movieDetails?.overview &&
-                  (movieDetails?.overview?.length > 231 ||
-                    movieDetails?.overview?.length > 350)
-                ? "h-[98rem]"
-                : "h-[108rem]"
-            } lg:h-full flex justify-start items-start relative`}
+            className="w-screen"
+            style={{
+              background: `url(${BASE_IMAGE_URL}${movieDetails.backdrop_path})`,
+              backgroundSize: "cover",
+            }}
           >
-            <img
-              src={`${BASE_IMAGE_URL}${movieDetails.backdrop_path}`}
-              alt="Movie Background"
-              className={`${
-                movieDetails.backdrop_path ? "h-full" : "h-[54rem]"
-              } w-full object-cover object-top`}
-            />
-            <div className="absolute z-10 w-full h-full flex flex-col justify-start items-start px-4 md:px-[3.12rem] pt-4  bg-[linear-gradient(0deg,_rgba(22,_24,_30,_0.70)_0%,_rgba(22,_24,_30,_0.70)_100%)]">
+            <div className="w-full h-full flex flex-col justify-start items-start px-4 md:px-[3.12rem] py-10  bg-[linear-gradient(0deg,_rgba(22,_24,_30,_0.70)_0%,_rgba(22,_24,_30,_0.70)_100%)]">
               <div className="flex flex-row space-x-[1.31rem] items-center justify-center">
                 <Link to="/">
                   <Btn type="arrow">
