@@ -11,7 +11,7 @@ interface Props {
 
 const SideMenu: FC<Props> = ({ setIsOpen }) => {
   return (
-    <div className="relative h-screen w-full pl-[2.25rem] pr[1.44rem] pt-4 flex flex-col space-y-[2.06rem] bg-black lg:bg-opacity-0">
+    <div className="relative h-screen w-full pl-[2.25rem] pr[1.44rem] pt-4 flex flex-col space-y-[2.06rem] bg-black lg:bg-opacity-0 overflow-y-auto pb-10 scrollbar-thumb-primary scrollbar-thin">
       <button
         onClick={() => setIsOpen(false)}
         className="block lg:hidden absolute left-4"

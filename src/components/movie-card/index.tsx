@@ -10,7 +10,9 @@ import { RotatingLines, ThreeDots } from "react-loader-spinner";
 const SkeletonLoader: FC = () => {
   return (
     <SkeletonTheme baseColor="#22242D" highlightColor="#9BA3AF" width="100%">
-      <div className="flex flex-col justify-start items-start flex-shrink-0 font-lato w-full md:w-[15.44rem] pb-10 px-2">
+      <div
+        className={`flex flex-col justify-center items-center flex-shrink-0 font-lato w-full md:w-[15.44rem] pb-10 px-2`}
+      >
         <Skeleton height="26.06rem" width="15.44rem" borderRadius="1.25rem" />
         <p className="mt-2">
           <Skeleton count={3} width="15.44rem" />
@@ -27,7 +29,7 @@ const MovieCardComponent: FC<{
   return (
     <div className="h-full w-full flex flex-col justify-start">
       {movies.length === 0 && isLoading ? (
-        <div className="flex flex-wrap justify-start md:justify-evenly lg:justify-between items-center w-full">
+        <div className="flex flex-wrap justify-evenly lg:justify-between items-center w-full px-2.5 md:px-0">
           {Array(21)
             .fill(true)
             .map((_, i) => (
