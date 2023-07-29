@@ -59,8 +59,8 @@ const initialState: MovieState = {
     upcoming: { page: 1, results: [], isLoading: true },
     discovery: { page: 1, results: [], isLoading: true },
     trending: { page: 1, results: [], isLoading: true },
+    search_results: { page: 1, results: [], isLoading: true },
   },
-  searchedMovie: { page: 1, results: [], isLoading: true },
   searchedPerson: { isLoading: true, persons: { results: [] } },
   videoModal: { isOpen: false, youtubeKey: "" },
   watchlist: JSON.parse(localStorage.getItem("watchlist") as string) || [],
@@ -229,11 +229,11 @@ export const searchPerson = createAsyncThunk(
   "search/person",
   async (query: {
     searchedPhrase: string;
-    type: string;
+    page: string;
   }): Promise<AxiosResponse<PopularPersonsResponse>> => {
-    const { searchedPhrase, type } = query;
+    const { searchedPhrase, page } = query;
     try {
-      return await searchResource(searchedPhrase, "person");
+      return await searchResource(searchedPhrase, "person", page);
     } catch (error) {
       return Promise.reject(error);
     }
@@ -244,11 +244,11 @@ export const searchMovie = createAsyncThunk(
   "search/movie",
   async (query: {
     searchedPhrase: string;
-    type: string;
+    page: string;
   }): Promise<AxiosResponse<MovieResponse>> => {
-    const { searchedPhrase, type } = query;
+    const { searchedPhrase, page } = query;
     try {
-      return await searchResource(searchedPhrase, "movie");
+      return await searchResource(searchedPhrase, "movie", page);
     } catch (error) {
       return Promise.reject(error);
     }
@@ -484,19 +484,19 @@ export const movieSlice = createSlice({
       })
       .addCase(searchMovie.pending, (state) => {
         state.loadMore = true;
-        state.searchedMovie.isLoading = true;
+        state.trends.search_results.isLoading = true;
       })
       .addCase(searchMovie.fulfilled, (state, { payload }) => {
         state.loadMore = false;
-        state.searchedMovie.isLoading = false;
-        state.searchedMovie.results = [
-          ...state.searchedMovie.results,
+        state.trends.search_results.isLoading = false;
+        state.trends.search_results.results = [
+          ...state.trends.search_results.results,
           ...payload.data.results,
         ];
       })
       .addCase(searchMovie.rejected, (state) => {
         state.loadMore = false;
-        state.searchedMovie.isLoading = false;
+        state.trends.search_results.isLoading = false;
       });
   },
 });

@@ -15,10 +15,10 @@ const WatchList: FC = () => {
         <h1 className="text-[2rem] font-extrabold text-left w-full text-primaryText font-lato capitalize">
           Watchlist
         </h1>
-        <div className="flex flex-row justify-center items-center space-x-2 mr-7">
-          <Funnel />
-          <DropdownComponent />
-        </div>
+        {/*<div className="flex flex-row justify-center items-center space-x-2 mr-7">*/}
+        {/*  <Funnel />*/}
+        {/*  <DropdownComponent />*/}
+        {/*</div>*/}
       </div>
       <MovieCardComponent isLoading={false} movies={watchlist} />
     </Layout>

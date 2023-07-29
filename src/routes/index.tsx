@@ -20,6 +20,7 @@ const LocalRoute: FC = () => {
       <Route path="/genre/:type" element={<GenresPage />} />
       <Route path="/person/:id" element={<Person />} />
       <Route path="/watchlist" element={<Watchlist />} />
+      <Route path="/search" element={<Category />} />
     </Routes>
   );
 };

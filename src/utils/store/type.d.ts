@@ -180,6 +180,7 @@ export interface TrendsObj {
   upcoming: MovieStateData;
   discovery: MovieStateData;
   trending: MovieStateData;
+  search_results: MovieStateData;
 }
 
 export interface GenreObj {
@@ -216,7 +217,6 @@ export interface MovieState {
   watchlist: (MovieDetails | MovieData)[];
   loadMore: boolean;
   searchedPerson: PopularPersonObj;
-  searchedMovie: MovieStateData;
 }
 
 export interface MovieQuery {

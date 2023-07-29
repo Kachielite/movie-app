@@ -71,9 +71,12 @@ const MovieCard: FC<{
     }
     if (pathname.includes("genre")) {
       return dispatch(setPageGenre());
-    } else {
-      return dispatch(setPage(typeTrend));
     }
+    if (pathname.includes("search")) {
+      return dispatch(setPage("search_results"));
+    }
+
+    return dispatch(setPage(typeTrend));
   };
 
   const scrollRef: React.LegacyRef<HTMLDivElement> | undefined =

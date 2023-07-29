@@ -1,7 +1,8 @@
 import { FC } from "react";
 import RatingComponent from "../rating-component";
 import { BASE_IMAGE_URL } from "../../utils/services";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import moviePosterFallback from "../../assets/images/movie_poster.png";
 
 interface Props {
   id: number;
@@ -35,7 +36,11 @@ const Card: FC<Props> = ({
     >
       <div className="relative w-full h-[26.06rem] rounded-t-[1.06rem] overflow-hidden">
         <img
-          src={`${BASE_IMAGE_URL}${poster_path}`}
+          src={
+            poster_path
+              ? `${BASE_IMAGE_URL}${poster_path}`
+              : moviePosterFallback
+          }
           alt={title}
           className="object-cover object-center w-full h-full"
         />

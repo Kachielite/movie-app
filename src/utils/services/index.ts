@@ -8,7 +8,7 @@ export const BASE_IMAGE_URL = process.env.REACT_APP_IMAGE_BASE_URL;
 
 const API_PATHS = {
   getDiscoverList: (type: Movie | TV, page: number): string => {
-    return `/discover/${type}?page=${page}`;
+    return `/discover/${type}?page=${page}&sort_by=popularity.desc`;
   },
   getDiscoveryWithGenre: (page: string, genre: string): string => {
     return `/discover/movie?page=${page}&with_genres=${genre}`;
@@ -43,8 +43,8 @@ const API_PATHS = {
   trailer: (movie_id: string): string => {
     return `/movie/${movie_id}/videos`;
   },
-  search: (query: string, type: string): string => {
-    return `/search/${type}?query=${query}`;
+  search: (query: string, type: string, page: string): string => {
+    return `/search/${type}?query=${query}&page=${page}`;
   },
 };
 
@@ -166,9 +166,10 @@ export const getMoviesTrailer = async (id: string): Promise<AxiosResponse> => {
 export const searchResource = async (
   query: string,
   type: string,
+  page: string,
 ): Promise<AxiosResponse> => {
   try {
-    return await customAxios(`${API_PATHS.search(query, type)}`);
+    return await customAxios(`${API_PATHS.search(query, type, page)}`);
   } catch (e) {
     return Promise.reject(e);
   }
