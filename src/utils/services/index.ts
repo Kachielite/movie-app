@@ -43,6 +43,9 @@ const API_PATHS = {
   personMovieCredits: (person_id: string): string => {
     return `/person/${person_id}/movie_credits`;
   },
+  trailer: (movie_id: string): string => {
+    return `/movie/${movie_id}/videos`;
+  },
 };
 
 export const getMoviesTrend = async (
@@ -147,6 +150,14 @@ export const getMoviesBasedOnGenre = async (
 ): Promise<AxiosResponse> => {
   try {
     return await customAxios(`${API_PATHS.getDiscoveryWithGenre(page, genre)}`);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+export const getMoviesTrailer = async (id: string): Promise<AxiosResponse> => {
+  try {
+    return await customAxios(`${API_PATHS.trailer(id)}`);
   } catch (e) {
     return Promise.reject(e);
   }

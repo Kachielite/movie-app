@@ -203,6 +203,7 @@ export interface MovieDetailsObj {
   reviews: ReviewResponse;
   similar: MovieStateData;
   collection: CollectionResponse;
+  trailer: Trailer;
 }
 
 export interface MovieState {
@@ -211,6 +212,7 @@ export interface MovieState {
   details: MovieDetailsObj;
   person: Person;
   persons: PopularPersonObj;
+  videoModal: { isOpen: boolean; youtubeKey: string };
   watchlist: (MovieDetails | MovieData)[];
 }
 
@@ -267,4 +269,17 @@ export interface PopularPersonsResponse {
 export interface PopularPersonObj {
   isLoading: boolean;
   persons: PopularPersonsResponse;
+}
+
+export interface Trailer {
+  iso_639_1?: string;
+  iso_3166_1?: string;
+  name?: string;
+  key?: string;
+  site?: string;
+  size?: number;
+  type?: string;
+  official?: boolean;
+  published_at?: string;
+  id?: number;
 }

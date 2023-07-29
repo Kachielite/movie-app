@@ -9,8 +9,8 @@ import {
   MovieState,
   PersonMovieCreditResponse,
   PersonResponse,
-  PopularPersons,
   PopularPersonsResponse,
+  Trailer,
 } from "../type";
 import {
   getAllMovieGenres,
@@ -18,6 +18,7 @@ import {
   getMovieCollection,
   getMovieDetails,
   getMoviesBasedOnGenre,
+  getMoviesTrailer,
   getMoviesTrend,
   getPersonDetails,
   getPersonMovieCredits,
@@ -41,6 +42,7 @@ const initialState: MovieState = {
     reviews: {},
     similar: { page: 1, results: [] },
     collection: {},
+    trailer: {},
   },
   genres: {
     genre: [],
@@ -57,6 +59,7 @@ const initialState: MovieState = {
     discovery: { page: 1, results: [], isLoading: true },
     trending: { page: 1, results: [], isLoading: true },
   },
+  videoModal: { isOpen: false, youtubeKey: "" },
   watchlist: [],
 };
 
@@ -204,6 +207,20 @@ export const fetchMoviesBasedOnGenre = createAsyncThunk(
   },
 );
 
+export const fetchMovieTrailer = createAsyncThunk(
+  "movie/trailer",
+  async (query: {
+    id: string;
+  }): Promise<AxiosResponse<{ id: string; results: Trailer[] }>> => {
+    const { id } = query;
+    try {
+      return await getMoviesTrailer(id);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
+);
+
 export const movieSlice = createSlice({
   name: "movie",
   initialState,
@@ -240,6 +257,12 @@ export const movieSlice = createSlice({
       const trendToBeCleaned = action.payload as ObjectKey;
       state.trends[trendToBeCleaned].results = [];
       state.trends[trendToBeCleaned].page = 1;
+    },
+    showVideoModal: (state) => {
+      state.videoModal.isOpen = true;
+    },
+    hideVideoModel: (state) => {
+      state.videoModal.isOpen = false;
     },
   },
   extraReducers: function (builder) {
@@ -405,6 +428,24 @@ export const movieSlice = createSlice({
       )
       .addCase(fetchMoviesBasedOnGenre.rejected, (state) => {
         state.genres.movieBasedGenre.isLoading = false;
+      })
+      .addCase(fetchMovieTrailer.pending, (state) => {
+        state.details.isLoading = true;
+      })
+      .addCase(fetchMovieTrailer.fulfilled, (state, { payload, meta }) => {
+        state.details.isLoading = false;
+        state.details.trailer = !payload.data.results.filter(
+          (m: Trailer) => m.name === "Official Trailer",
+        )[0]
+          ? payload.data.results.filter(
+              (m: Trailer) => m.name?.includes("Trailer"),
+            )[0]
+          : payload.data.results.filter(
+              (m: Trailer) => m.name === "Official Trailer",
+            )[0];
+      })
+      .addCase(fetchMovieTrailer.rejected, (state) => {
+        state.details.isLoading = false;
       });
   },
 });
@@ -416,6 +457,8 @@ export const {
   setPageGenre,
   cleanupGenre,
   cleanupCategories,
+  showVideoModal,
+  hideVideoModel,
 } = movieSlice.actions;
 
 export default movieSlice.reducer;

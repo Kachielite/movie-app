@@ -8,6 +8,8 @@ import { MovieData, MovieDetails } from "../../../utils/store/type";
 import {
   addToWatchlist,
   deleteFromWatchlist,
+  fetchMovieTrailer,
+  showVideoModal,
 } from "../../../utils/store/slides/movie";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 
@@ -33,9 +35,20 @@ const Controls: FC<Props> = ({ slideIndex, slideHandler, caption, movie }) => {
     }
   };
 
+  const id = movie?.id?.toString();
+
+  const showModal = () => {
+    if (id) {
+      dispatch(fetchMovieTrailer({ id: id }));
+      dispatch(showVideoModal());
+    }
+  };
+
   useEffect(() => {
-    watchlistCheck();
-  }, [watchlist]);
+    if (id) {
+      dispatch(fetchMovieTrailer({ id: id }));
+    }
+  }, []);
 
   return (
     <div className="absolute z-40 flex flex-col justify-between h-full w-full py-[1.31rem] px-2.5 lg:px-[1.25rem] rounded-[1.25rem] mt-[2.8rem] bg-black/[0.2]">
@@ -99,7 +112,9 @@ const Controls: FC<Props> = ({ slideIndex, slideHandler, caption, movie }) => {
             <CircleBtn color={currentSlide(6)} />
           </button>
         </div>
-        <Btn type="primary">Watch Now</Btn>
+        <Btn type="primary" onClick={showModal}>
+          Watch Trailer
+        </Btn>
       </div>
     </div>
   );

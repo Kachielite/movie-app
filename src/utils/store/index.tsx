@@ -7,6 +7,17 @@ export const store = configureStore({
     selection: selectionReducer,
     movie: movieReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        // Ignore these action types
+        ignoredActions: ["movie/trailer/fulfilled"],
+        // Ignore these field paths in all actions
+        ignoredActionPaths: ["payload.headers"],
+        // Ignore these paths in the state
+        ignoredPaths: ["items.dates"],
+      },
+    }),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

@@ -10,6 +10,8 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 import {
   addToWatchlist,
   deleteFromWatchlist,
+  fetchMovieTrailer,
+  showVideoModal,
 } from "../../../utils/store/slides/movie";
 
 const CategoryCard: FC<{ movie: MovieData }> = ({ movie }) => {
@@ -31,6 +33,13 @@ const CategoryCard: FC<{ movie: MovieData }> = ({ movie }) => {
   const getGenre = (): string | undefined => {
     if (genreIds) {
       return genre.filter((g) => g.id === genreIds[0])[0]?.name as string;
+    }
+  };
+
+  const showModal = () => {
+    if (id) {
+      dispatch(fetchMovieTrailer({ id: id.toString() }));
+      dispatch(showVideoModal());
     }
   };
 
@@ -72,7 +81,9 @@ const CategoryCard: FC<{ movie: MovieData }> = ({ movie }) => {
               <Plus />
             </Btn>
           )}
-          <Btn type="category">Watch</Btn>
+          <Btn type="category" onClick={showModal}>
+            Watch
+          </Btn>
         </div>
       </div>
     </div>

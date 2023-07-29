@@ -13,6 +13,7 @@ const Slideshow: FC = () => {
   useEffect(() => {
     dispatch(fetchMoviesTrend({ trend: "now_playing", page: 1 }));
   }, []);
+
   return (
     <div className="px-4 w-full">
       {isLoading ? (

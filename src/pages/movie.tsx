@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import Btn from "../components/buttons";
 import { Plus, PreviousBtn } from "../components/Icon-components";
 import RatingComponent from "../components/rating-component";
@@ -10,7 +10,9 @@ import {
   deleteFromWatchlist,
   fetchMovieCollection,
   fetchMovieDetails,
+  fetchMovieTrailer,
   fetchSpecificDetails,
+  showVideoModal,
 } from "../utils/store/slides/movie";
 import { RootState } from "../utils/store";
 import { BASE_IMAGE_URL } from "../utils/services";
@@ -20,6 +22,9 @@ import { Crew, MovieData, MovieDetails } from "../utils/store/type";
 import ReviewComponent from "../components/review-component";
 import SimilarMovieComponent from "../components/similar-movie-component";
 import { MdOutlineDeleteOutline } from "react-icons/md";
+import ModalVideo from "react-modal-video";
+import VideoModal from "../components/videoModal";
+// import 'node_modules/react-modal-video/scss/modal-video.scss';
 
 const Movie: FC = () => {
   const { id } = useParams<string>();
@@ -31,6 +36,7 @@ const Movie: FC = () => {
     details: movieDetails,
     similar,
     collection,
+    trailer,
   } = useAppSelector((state: RootState) => state.movie.details);
   const watchlist = useAppSelector((state: RootState) => state.movie.watchlist);
   const { crew, cast } = credits;
@@ -64,22 +70,32 @@ const Movie: FC = () => {
     );
   };
 
+  const showModal = () => {
+    if (id) {
+      dispatch(fetchMovieTrailer({ id: id }));
+      dispatch(showVideoModal());
+    }
+  };
+
   useEffect(() => {
     watchlistCheck();
   }, [watchlist]);
 
   return (
-    <div className="w-full min-h-screen flex justify-center items-center">
+    <div className="relative w-full min-h-screen flex justify-center items-center">
       {isLoading ? (
         <RotatingLines
           strokeColor="#F8B319"
-          strokeWidth="5"
+          strokeWidth="2"
           animationDuration="0.75"
           width="200"
           visible={true}
         />
       ) : (
-        <div className="w-screen h-full  bg-black flex flex-col justify-start items-start font-lato">
+        <div className="relative w-screen h-full  bg-black flex flex-col justify-start items-start font-lato">
+          <div className="absolute flex justify-center items-center z-40 bg-red-500 w-screen">
+            <VideoModal />
+          </div>
           <div
             className={`w-full ${
               movieDetails?.overview && movieDetails?.overview?.length < 230
@@ -98,7 +114,7 @@ const Movie: FC = () => {
                 movieDetails.backdrop_path ? "h-full" : "h-[54rem]"
               } w-full object-cover object-top`}
             />
-            <div className="absolute z-40 w-full h-full flex flex-col justify-start items-start px-4 md:px-[3.12rem] pt-4  bg-[linear-gradient(0deg,_rgba(22,_24,_30,_0.70)_0%,_rgba(22,_24,_30,_0.70)_100%)]">
+            <div className="absolute z-10 w-full h-full flex flex-col justify-start items-start px-4 md:px-[3.12rem] pt-4  bg-[linear-gradient(0deg,_rgba(22,_24,_30,_0.70)_0%,_rgba(22,_24,_30,_0.70)_100%)]">
               <div className="flex flex-row space-x-[1.31rem] items-center justify-center">
                 <Link to="/">
                   <Btn type="arrow">
@@ -149,8 +165,8 @@ const Movie: FC = () => {
                         </div>
                       </Btn>
                     )}
-                    <Btn type="cta">
-                      <p className="lg:px-[0.65rem]">Watch now</p>
+                    <Btn type="cta" onClick={showModal}>
+                      <p className="lg:px-[0.65rem]">Watch Trailer</p>
                     </Btn>
                   </div>
                 </div>
