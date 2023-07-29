@@ -14,8 +14,5 @@ module.exports = {
       lato: ["Lato", "serif"],
     },
   },
-  plugins: [
-    require("tailwind-scrollbar"),
-    require("@tailwindcss/aspect-ratio"),
-  ],
+  plugins: [require("tailwind-scrollbar")],
 };
