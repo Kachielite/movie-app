@@ -61,6 +61,7 @@ const initialState: MovieState = {
   },
   videoModal: { isOpen: false, youtubeKey: "" },
   watchlist: [],
+  loadMore: false,
 };
 
 export const fetchMoviesTrend = createAsyncThunk(
@@ -268,15 +269,12 @@ export const movieSlice = createSlice({
   extraReducers: function (builder) {
     builder
       .addCase(fetchMoviesTrend.pending, (state, { meta }) => {
-        arg = meta.arg.trend as ObjectKey;
-        if (state.trends[arg].results.length === 0) {
-          state.trends[arg].isLoading = true;
-        }
+        state.loadMore = true;
       })
       .addCase(fetchMoviesTrend.fulfilled, (state, { payload, meta }) => {
         arg = meta.arg.trend as ObjectKey;
         const trendsArray: ObjectKey[] = [];
-        state.trends[arg].isLoading = false;
+        state.loadMore = false;
         trendsArray.map((i): void => {
           console.log(i);
           if (i != arg) {
@@ -292,7 +290,7 @@ export const movieSlice = createSlice({
       })
       .addCase(fetchMoviesTrend.rejected, (state, { meta }) => {
         arg = meta.arg.trend as ObjectKey;
-        state.trends[arg].isLoading = false;
+        state.loadMore = false;
       })
       .addCase(discoverMovies.pending, (state) => {
         state.trends.discovery.results = [];

@@ -24,7 +24,6 @@ const MovieCardComponent: FC<{
   isLoading: boolean;
   movies: MovieData[] | MovieDetails[];
 }> = ({ isLoading, movies }) => {
-  const loading = true;
   return (
     <div className="h-full w-full flex flex-col justify-start">
       {movies.length === 0 && isLoading ? (
@@ -39,15 +38,15 @@ const MovieCardComponent: FC<{
         <MovieCard movies={movies} />
       )}
       {movies.length > 0 && isLoading && (
-        <div className="flex flex-row justify-center items-center w-full pb-44 pt-10">
-          <p className="text-primaryText font-semibold mr-5 font-lato">
-            Loading more movies
+        <div className="flex flex-row justify-center items-center w-full pb-56 pt-16">
+          <p className="text-primaryText font-semibold mr-3 font-lato text-xl">
+            Loading
           </p>
           <RotatingLines
             strokeColor="#F8B319"
-            strokeWidth="2"
+            strokeWidth="3"
             animationDuration="0.75"
-            width="50"
+            width="30"
             visible={true}
           />
         </div>

@@ -214,6 +214,7 @@ export interface MovieState {
   persons: PopularPersonObj;
   videoModal: { isOpen: boolean; youtubeKey: string };
   watchlist: (MovieDetails | MovieData)[];
+  loadMore: boolean;
 }
 
 export interface MovieQuery {

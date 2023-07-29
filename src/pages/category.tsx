@@ -16,7 +16,9 @@ const Category: FC = () => {
   type TrendsKey = keyof typeof trends;
   const { type } = useParams();
   const dispatch = useAppDispatch();
-  const { trends } = useAppSelector((state: RootState) => state.movie);
+  const { trends, loadMore } = useAppSelector(
+    (state: RootState) => state.movie,
+  );
   const trendType = type as TrendsKey;
 
   useEffect(() => {
@@ -43,7 +45,7 @@ const Category: FC = () => {
         </div>
       </div>
       <MovieCardComponent
-        isLoading={trends[type as TrendsKey]?.isLoading as boolean}
+        isLoading={loadMore}
         movies={trends[type as TrendsKey]?.results}
       />
     </Layout>
