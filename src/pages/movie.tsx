@@ -259,12 +259,10 @@ const Movie: FC = () => {
           {reviewData && reviewData?.length > 0 && (
             <ReviewComponent results={reviewData} />
           )}
-          <div className="w-full">
-            <SimilarMovieComponent
-              movieData={similarMoviesData}
-              title="Recommendations"
-            />
-          </div>
+          <SimilarMovieComponent
+            movieData={similarMoviesData}
+            title="Recommendations"
+          />
         </div>
       )}
     </div>

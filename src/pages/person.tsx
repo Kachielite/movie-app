@@ -89,7 +89,7 @@ const Person: FC = () => {
             <h1 className="text-[2.4rem]  text-primaryText font-extrabold mb-5">
               Biography
             </h1>
-            <p className="text-[1.56rem] leading-[3rem] text-left  text-primaryText w-full">
+            <p className="text-xl text-justify md:text-left  lg:text-[1.56rem] leading-relaxed lg:leading-[3rem] text-left  text-primaryText w-full">
               {details?.biography}
             </p>
           </div>

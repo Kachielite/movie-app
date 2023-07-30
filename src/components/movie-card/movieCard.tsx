@@ -88,7 +88,7 @@ const MovieCard: FC<{
       className="flex flex-wrap mt-[1.12rem] justify-start  items-center w-full h-full px-4 overflow-y-scroll scrollbar-thin scrollbar-thumb-primary"
       ref={scrollRef}
     >
-      <div className="flex flex-wrap justify-evenly lg:justify-start items-center w-full">
+      <div className="flex flex-wrap justify-evenly lg:justify-between items-center w-full">
         <CardToRender data={movies} selection={selection} />
       </div>
     </div>

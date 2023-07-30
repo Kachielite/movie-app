@@ -25,5 +25,7 @@ const MENU_ITEMS = [
   },
 ];
 
-const Menu: FC = () => <MenuComponent menu={MENU_ITEMS} title="Menu" />;
+const Menu: FC<{ setIsOpen: (state: boolean) => void }> = ({ setIsOpen }) => (
+  <MenuComponent menu={MENU_ITEMS} title="Menu" setIsOpen={setIsOpen} />
+);
 export default Menu;

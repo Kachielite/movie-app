@@ -11,7 +11,7 @@ const WatchList: FC = () => {
 
   return (
     <Layout>
-      <div className="px-4 w-full flex flex-row justify-between items-center">
+      <div className="px-4 w-full flex flex-col justify-start items-start overflow-y-auto">
         <h1 className="text-[2rem] font-extrabold text-left w-full text-primaryText font-lato capitalize">
           Watchlist
         </h1>
@@ -19,8 +19,8 @@ const WatchList: FC = () => {
         {/*  <Funnel />*/}
         {/*  <DropdownComponent />*/}
         {/*</div>*/}
+        <MovieCardComponent isLoading={false} movies={watchlist} />
       </div>
-      <MovieCardComponent isLoading={false} movies={watchlist} />
     </Layout>
   );
 };

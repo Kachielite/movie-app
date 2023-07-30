@@ -7,7 +7,7 @@ const SimilarMovieComponent: FC<{ movieData: MovieData[]; title: string }> = ({
   title,
 }) => {
   return (
-    <div className="w-full  px-4 md:px-[5.12rem]">
+    <div className="w-full  pl-4 md:pl-[5.12rem]">
       <h1 className="text-[2.4rem]  text-primaryText font-extrabold mb-5">
         {title}
       </h1>

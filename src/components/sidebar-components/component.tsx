@@ -7,9 +7,10 @@ import { useAppDispatch } from "../../utils/store/hooks";
 interface Props {
   menu: MenuItem[];
   title: string;
+  setIsOpen: (state: boolean) => void;
 }
 
-const MenuComponent: FC<Props> = ({ menu, title }) => {
+const MenuComponent: FC<Props> = ({ menu, title, setIsOpen }) => {
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   const menuHighlighter = (name: string): string => {
@@ -24,6 +25,11 @@ const MenuComponent: FC<Props> = ({ menu, title }) => {
     }
   };
 
+  const LinkHandler = (link: string): void => {
+    dispatch(cleanupCategories(link));
+    setIsOpen(false);
+  };
+
   return (
     <div className="flex flex-col justify-start items-start space-y-[1.52rem] font-lato w-full">
       <h1 className="text-[#BABABA] font-bold">{title}</h1>
@@ -31,7 +37,7 @@ const MenuComponent: FC<Props> = ({ menu, title }) => {
         {menu.map(({ icon, name, link }: MenuItem, index) => {
           return (
             <Link
-              onClick={() => dispatch(cleanupCategories(link))}
+              onClick={() => LinkHandler(link)}
               to={menuHighlighter(link)}
               className={`group flex flex-row space-x-[0.94rem] w-full cursor-pointer hover:border-r-4 hover:border-r-primary ${
                 (pathname === `/category/${link.toLowerCase()}` &&

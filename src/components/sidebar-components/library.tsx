@@ -42,5 +42,7 @@ const MENU_ITEMS = [
   },
 ];
 
-const Library: FC = () => <MenuComponent menu={MENU_ITEMS} title="Library" />;
+const Library: FC<{ setIsOpen: (state: boolean) => void }> = ({
+  setIsOpen,
+}) => <MenuComponent menu={MENU_ITEMS} title="Library" setIsOpen={setIsOpen} />;
 export default Library;

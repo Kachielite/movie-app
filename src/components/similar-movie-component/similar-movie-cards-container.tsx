@@ -6,7 +6,7 @@ const SimilarMovieCardsContainer: FC<{ movieData: MovieData[] }> = ({
   movieData,
 }) => {
   return (
-    <div className="w-screen flex flex-row justify-start items-center overflow-x-auto scrollbar-none">
+    <div className="w-full flex flex-row justify-start items-center overflow-x-auto scrollbar-thin scrollbar-thumb-primary">
       {movieData.map(
         ({
           id,

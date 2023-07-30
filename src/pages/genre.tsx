@@ -17,12 +17,12 @@ const GenrePage: FC = () => {
         <h1 className="text-[2rem] font-extrabold text-left w-full text-primaryText font-lato capitalize">
           Genre
         </h1>
-        <div className="flex flex-row flex-wrap w-full mt-2 font-lato justify-center md:justify-between h-full lg:pr-4 pb-36  scrollbar-none overflow-y-auto">
+        <div className="flex flex-row flex-wrap w-full mt-2 font-lato justify-center md:justify-between items-center h-full pb-36  scrollbar-none overflow-y-auto">
           {isLoading
             ? Array(16)
                 .fill(true)
                 .map((_, i) => (
-                  <div className="mb-10 mr-10 w-full md:w-[13.13rem]">
+                  <div className="mb-10 w-full md:w-[13.13rem] ">
                     <CategorySkeleton key={i} />
                   </div>
                 ))

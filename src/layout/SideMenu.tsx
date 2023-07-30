@@ -28,8 +28,8 @@ const SideMenu: FC<Props> = ({ setIsOpen }) => {
           <p>PLANET</p>
         </div>
       </Link>
-      <Menu />
-      <Library />
+      <Menu setIsOpen={setIsOpen} />
+      <Library setIsOpen={setIsOpen} />
     </div>
   );
 };

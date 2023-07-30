@@ -26,7 +26,7 @@ const CreditCardsContainerComponent: FC<Props> = ({
   return (
     <div className="flex flex-col justify-center items-center w-full space-x-1.5">
       <div className="h-full w-full flex flex-col justify-center items-center space-y-7">
-        <div className="w-screen lg:w-full flex flex-row lg:flex-wrap space-x-[1rem] overflow-x-auto">
+        <div className="w-screen lg:w-full flex flex-row lg:flex-wrap justify-between overflow-x-auto">
           {isLoading
             ? Array(10)
                 .fill(true)
