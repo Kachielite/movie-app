@@ -58,23 +58,23 @@ The original design was created by **Anastasia Shlykova**. You can find her work
 
 ### Homepage
 
-<img width="800" alt="homepage" src="../movie-app/images/homepage.png">
+<img width="800" alt="homepage" src="./images/homepage.png">
 
 ### Category Page (Now Playing)
 
-<img width="800" alt="now playing" src="../movie-app/images/now_playing.png">
+<img width="800" alt="now playing" src="./images/now_playing.png">
 
 ### Genre Page
 
-<img width="800" alt="genre" src="../movie-app/images/genre.png">
+<img width="800" alt="genre" src="./images/genre.png">
 
 ### Movie Details Page
 
-<img width="800" alt="home" src="../movie-app/images/movi.png">
+<img width="800" alt="home" src="./images/movi.png">
 
 ### Cast Details page
 
-<img width="800" alt="home" src="../movie-app/images/cast.png">
+<img width="800" alt="home" src="./images/cast.png">
 
 ## Reflection:
 
