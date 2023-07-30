@@ -108,7 +108,7 @@ To start using MovieX, follow these steps:
   - After creating an account, sign in and navigate to your account settings.
   - Go to the "API" section and request an API key for the Movie Database API (TMDb API).
   - Copy the API Read Access Token provided by TheMovieDB.
-5. Open the .env.local file with a text editor, and add your API key as the value for the `REACT_APP_ACCESS_TOKEN`
+5. Open the .env.local file with a text editor, and add your API Read Access Token as the value for the `REACT_APP_ACCESS_TOKEN`
 6. Save the .env.local file after adding your API Read Access Token.
 7. Run the development server: `npm start`
 8. Open `http://localhost:3000` in your web browser.
