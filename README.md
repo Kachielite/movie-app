@@ -37,10 +37,10 @@ technologies used:
 
 - **Typescript:** The app is written in Typescript, which enhances code reliability and maintainability.
 
-- **React:** We leverage the power of React, a popular JavaScript library, to build a dynamic and interactive user
+- **React:** I leverage the power of React, a popular JavaScript library, to build a dynamic and interactive user
   interface.
 
-- **Redux:** For efficient state management, we use Redux, ensuring a consistent application state and seamless data
+- **Redux:** For efficient state management, I use Redux, ensuring a consistent application state and seamless data
   flow.
 
 - **Tailwind CSS:** Movie Planet is styled using Tailwind CSS, a utility-first CSS framework that enables us to create a
@@ -90,7 +90,7 @@ challenges and learning opportunities. Some key takeaways from this project incl
 - **Infinite Scroll:** Designing the infinite scroll feature was a very challenging and rewarding experience, as it greatly enhanced the user
   experience by providing continuous content without the need for pagination.
 
-- **Tailwind CSS:** Adopting Tailwind CSS simplified our styling process and enabled us to create a visually appealing
+- **Tailwind CSS:** Adopting Tailwind CSS simplified our styling process and enabled me to create a visually appealing
   user interface with minimal effort.
 
 I am proud of the final product and hope that Movie Planet will bring joy and entertainment to its users. As I continue to
@@ -100,12 +100,12 @@ enhance the app, I welcome your feedback and contributions to make Movie Planet 
 
 To start using MovieX, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/your-username/MovieX.git`
+1. Clone the repository: `git clone https://github.com/Kachielite/movie-app`
 2. Install dependencies: `npm install`
 3. Run the development server: `npm start`
 4. Open `http://localhost:3000` in your web browser.
 
-We hope you enjoy using Movie Planet to discover exciting movies and stay entertained. Feel free to contribute, report
+I hope you enjoy using Movie Planet to discover exciting movies and stay entertained. Feel free to contribute, report
 issues, or suggest improvements. Happy movie browsing! 🎬🍿
 
 
