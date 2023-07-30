@@ -102,8 +102,16 @@ To start using MovieX, follow these steps:
 
 1. Clone the repository: `git clone https://github.com/Kachielite/movie-app`
 2. Install dependencies: `npm install`
-3. Run the development server: `npm start`
-4. Open `http://localhost:3000` in your web browser.
+3. Rename the .env.example file to .env.local in the root directory of the project: `mv .env.example .env.local`
+4. Get your API Read Access Token from TheMovieDB website:
+  - Visit [TheMovieDB website](https://www.themoviedb.org/) and create an account (if you don't have one).
+  - After creating an account, sign in and navigate to your account settings.
+  - Go to the "API" section and request an API key for the Movie Database API (TMDb API).
+  - Copy the API Read Access Token provided by TheMovieDB.
+5. Open the .env.local file with a text editor, and add your API key as the value for the `REACT_APP_ACCESS_TOKEN`
+6. Save the .env.local file after adding your API Read Access Token.
+7. Run the development server: `npm start`
+8. Open `http://localhost:3000` in your web browser.
 
 I hope you enjoy using Movie Planet to discover exciting movies and stay entertained. Feel free to contribute, report
 issues, or suggest improvements. Happy movie browsing! 🎬🍿
