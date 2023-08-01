@@ -98,7 +98,7 @@ enhance the app, I welcome your feedback and contributions to make Movie Planet 
 
 ## Get Started:
 
-To start using MovieX, follow these steps:
+To start using Movie Planet, follow these steps:
 
 1. Clone the repository: `git clone https://github.com/Kachielite/movie-app`
 2. Install dependencies: `npm install`
